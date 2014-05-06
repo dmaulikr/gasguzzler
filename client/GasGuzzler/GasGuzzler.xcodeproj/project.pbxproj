@@ -28,7 +28,6 @@
 		AFF7705619183602004E4AE5 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705519183602004E4AE5 /* MenuScene.m */; };
 		AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF77058191837C1004E4AE5 /* SKLabelButton.m */; };
 		AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705B19183DFC004E4AE5 /* RootViewController.m */; };
-		AFF7705F19183E4A004E4AE5 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705E19183E4A004E4AE5 /* GameScene.m */; };
 		AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7706119184B81004E4AE5 /* SKSpriteButton.m */; };
 		AFF7B2D31918B97200B8085C /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2CF1918B97200B8085C /* HockeySDK.framework */; };
 		AFF7B2D41918B97200B8085C /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AFF7B2D11918B97200B8085C /* HockeySDK.xcconfig */; };
@@ -37,6 +36,7 @@
 		AFF7B2D91918B98800B8085C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2D81918B98800B8085C /* QuartzCore.framework */; };
 		AFF7B2DB1918B98D00B8085C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2DA1918B98D00B8085C /* Security.framework */; };
 		AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2DC1918B99200B8085C /* SystemConfiguration.framework */; };
+		AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,8 +79,6 @@
 		AFF77058191837C1004E4AE5 /* SKLabelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLabelButton.m; sourceTree = "<group>"; };
 		AFF7705A19183DFC004E4AE5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		AFF7705B19183DFC004E4AE5 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		AFF7705D19183E4A004E4AE5 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		AFF7705E19183E4A004E4AE5 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		AFF7706019184B81004E4AE5 /* SKSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSpriteButton.h; sourceTree = "<group>"; };
 		AFF7706119184B81004E4AE5 /* SKSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSpriteButton.m; sourceTree = "<group>"; };
 		AFF7B2CF1918B97200B8085C /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
@@ -90,6 +88,8 @@
 		AFF7B2D81918B98800B8085C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AFF7B2DA1918B98D00B8085C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AFF7B2DC1918B99200B8085C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AFF7B2DE1918C75700B8085C /* InfinityGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfinityGameScene.h; sourceTree = "<group>"; };
+		AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfinityGameScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +126,10 @@
 		AF57DDDD19189BDE00674CD5 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				AFF7705D19183E4A004E4AE5 /* GameScene.h */,
-				AFF7705E19183E4A004E4AE5 /* GameScene.m */,
 				AFF7705419183602004E4AE5 /* MenuScene.h */,
 				AFF7705519183602004E4AE5 /* MenuScene.m */,
+				AFF7B2DE1918C75700B8085C /* InfinityGameScene.h */,
+				AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -409,12 +409,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */,
+				AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */,
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
 				AFF7705619183602004E4AE5 /* MenuScene.m in Sources */,
 				AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */,
 				AFC439F119170CD100726778 /* AppDelegate.m in Sources */,
-				AFF7705F19183E4A004E4AE5 /* GameScene.m in Sources */,
 				AFC439ED19170CD100726778 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

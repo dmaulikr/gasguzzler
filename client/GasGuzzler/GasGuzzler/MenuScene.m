@@ -9,7 +9,7 @@
 #import "MenuScene.h"
 #import "SKLabelButton.h"
 #import "SKSpriteButton.h"
-#import "GameScene.h"
+#import "InfinityGameScene.h"
 
 @interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate>
 
@@ -108,9 +108,9 @@
 {
     if ([button.name isEqualToString:@"infinityModeButton"]) {
         // Present the game scene
-        GameScene *gs = [[GameScene alloc] initWithSize:self.frame.size];
+        InfinityGameScene *igs = [[InfinityGameScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
-        [self.view presentScene:gs transition:transition];
+        [self.view presentScene:igs transition:transition];
     }
 }
 

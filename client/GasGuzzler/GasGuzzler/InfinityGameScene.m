@@ -1,17 +1,17 @@
 //
-//  GameScene.m
+//  InfinityGameScene.m
 //  GasGuzzler
 //
 //  Created by Raymond kennedy on 5/5/14.
 //  Copyright (c) 2014 Raymond kennedy. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "InfinityGameScene.h"
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
 
-@interface GameScene () <SKSpriteButtonDelegate>
+@interface InfinityGameScene () <SKSpriteButtonDelegate>
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
 @property (nonatomic, strong) NSTimer *gameTimer;
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation GameScene
+@implementation InfinityGameScene
 
 /*
  * Initialize the scene
@@ -160,7 +160,6 @@
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     // Get the milliseconds and the timer string
-    //    NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
     NSString *timeString = [timerDate getTimerString];
     [self.gameTimeLabel setText:timeString];
     
@@ -179,7 +178,7 @@
         [self registerTapButtonHit];
     } else if ([button.name isEqualToString:@"backButton"]) {
         
-        MenuScene *ms = [[GameScene alloc] initWithSize:self.frame.size];
+        MenuScene *ms = [[MenuScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionRight duration:0.3f];
         [self.view presentScene:ms transition:transition];
         
