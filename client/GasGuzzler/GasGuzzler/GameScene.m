@@ -9,6 +9,8 @@
 #import "GameScene.h"
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
+#import "MenuScene.h"
+
 @interface GameScene () <SKSpriteButtonDelegate>
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
@@ -22,7 +24,6 @@
 
 @property (nonatomic, strong) SKSpriteButton *tapButton;
 
-@property (nonatomic) BOOL hasHitForCurrentSecond;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -142,7 +143,6 @@
 {
     self.startTime = [NSDate date];
     self.secondsElapsed = -1;
-    self.hasHitForCurrentSecond = YES;
     
     self.gameTimer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(updateGameTimer:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.gameTimer forMode:NSDefaultRunLoopMode];
@@ -160,18 +160,13 @@
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
     // Get the milliseconds and the timer string
-    NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
+    //    NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
     NSString *timeString = [timerDate getTimerString];
     [self.gameTimeLabel setText:timeString];
     
     // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
         self.secondsElapsed = (int)timeInterval;
-    }
-    
-    // Open it up for the current seconds
-    if (currentMilliseconds == self.timeThreshold && self.hasHitForCurrentSecond == YES) {
-        self.hasHitForCurrentSecond = NO;
     }
 }
 
@@ -182,6 +177,12 @@
 {
     if ([button.name isEqualToString:@"tapButton"]) {
         [self registerTapButtonHit];
+    } else if ([button.name isEqualToString:@"backButton"]) {
+        
+        MenuScene *ms = [[GameScene alloc] initWithSize:self.frame.size];
+        SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionRight duration:0.3f];
+        [self.view presentScene:ms transition:transition];
+        
     }
 }
 
@@ -203,13 +204,9 @@
     
     // From 900--0 or 0-100
     if (self.secondsElapsed == 0 && (currentMilliseconds >= 1000 - self.timeThreshold)) {
-        self.hasHitForCurrentSecond = YES;
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
     } else if ((currentMilliseconds >= 1000 - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
-        self.hasHitForCurrentSecond = YES;
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
-    } else {
-        self.hasHitForCurrentSecond = YES;
     }
     
     NSString *hitTimeString = [timeSinceStart getTimerString];
@@ -236,19 +233,19 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self];
-//        
-//        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-//        
-//        sprite.position = location;
-//        
-//        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-//        
-//        [sprite runAction:[SKAction repeatActionForever:action]];
-//        
-//        [self addChild:sprite];
-//    }
+    //    for (UITouch *touch in touches) {
+    //        CGPoint location = [touch locationInNode:self];
+    //
+    //        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+    //
+    //        sprite.position = location;
+    //
+    //        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
+    //
+    //        [sprite runAction:[SKAction repeatActionForever:action]];
+    //
+    //        [self addChild:sprite];
+    //    }
 }
 
 -(void)update:(CFTimeInterval)currentTime {

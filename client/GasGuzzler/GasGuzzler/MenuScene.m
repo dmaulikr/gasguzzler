@@ -8,16 +8,18 @@
 
 #import "MenuScene.h"
 #import "SKLabelButton.h"
+#import "SKSpriteButton.h"
 #import "GameScene.h"
 
-@interface MenuScene () <SKLabelButtonDelegate>
+@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate>
 
 @property (nonatomic, strong) SKLabelNode *titleLabel;
 
 // Menu Items
-@property (nonatomic, strong) SKLabelButton *playButton;
-@property (nonatomic, strong) SKLabelButton *highScoresButton;
-@property (nonatomic, strong) SKLabelButton *helpButton;
+@property (nonatomic, strong) SKSpriteButton *infinityModeButton;
+@property (nonatomic, strong) SKSpriteButton *thirtySecondModeButton;
+@property (nonatomic, strong) SKSpriteButton *leaderboardsButton;
+@property (nonatomic, strong) SKSpriteButton *helpButton;
 
 @end
 
@@ -53,10 +55,10 @@
 - (void)setupTitle {
     
     self.titleLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 100);
+    self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 130);
     [self.titleLabel setText:@"Gas Guzzler"];
     [self.titleLabel setFontColor:[SKColor blackColor]];
-    [self.titleLabel setFontSize:50.0f];
+    [self.titleLabel setFontSize:70.0f];
     
     [self addChild:self.titleLabel];
 }
@@ -66,59 +68,58 @@
  */
 - (void)setupMenuItems
 {
-    self.playButton = [SKLabelButton buttonWithDownColor:[UIColor colorWithRed:0.2 green:0.6 blue:0.86 alpha:1]];
-    [self.playButton setDelegate:self];
-    [self.playButton setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
-    [self.playButton setText:@"Play"];
-    [self.playButton setFontName:@"AmericanCaptain"];
-    [self.playButton setName:@"play"];
-    [self.playButton setFontColor:[UIColor darkGrayColor]];
-    [self.playButton setFontSize:30.0f];
-    [self.playButton setUserInteractionEnabled:YES];
-    [self addChild:self.playButton];
+    float yCenter = CGRectGetMidY(self.frame) - 40;
+    float xCenter = CGRectGetMidX(self.frame);
     
-    self.highScoresButton = [SKLabelButton buttonWithDownColor:[UIColor colorWithRed:0.2 green:0.6 blue:0.86 alpha:1]];
-    [self.highScoresButton setDelegate:self];
-    [self.highScoresButton setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 50)];
-    [self.highScoresButton setText:@"High Scores"];
-    [self.highScoresButton setFontName:@"AmericanCaptain"];
-    [self.highScoresButton setName:@"highScores"];
-    [self.highScoresButton setFontColor:[UIColor darkGrayColor]];
-    [self.highScoresButton setFontSize:30.0f];
-    [self.highScoresButton setUserInteractionEnabled:YES];
-    [self addChild:self.highScoresButton];
+    self.infinityModeButton = [SKSpriteButton spriteButtonWithUpImage:@"infinityModeButton" downImage:@"infinityModeButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.infinityModeButton setDelegate:self];
+    [self.infinityModeButton setPosition:CGPointMake(xCenter - 78, yCenter + 78)];
+    [self.infinityModeButton setEnabled:YES];
+    [self.infinityModeButton setName:@"infinityModeButton"];
+    [self addChild:self.infinityModeButton];
+
+    self.thirtySecondModeButton = [SKSpriteButton spriteButtonWithUpImage:@"30secondModeButton" downImage:@"30secondModeButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.thirtySecondModeButton setDelegate:self];
+    [self.thirtySecondModeButton setPosition:CGPointMake(xCenter + 78, yCenter + 78)];
+    [self.thirtySecondModeButton setEnabled:YES];
+    [self.thirtySecondModeButton setName:@"30secondModeButton"];
+    [self addChild:self.thirtySecondModeButton];
     
-    self.helpButton = [SKLabelButton buttonWithDownColor:[UIColor colorWithRed:0.2 green:0.6 blue:0.86 alpha:1]];
+    self.leaderboardsButton = [SKSpriteButton spriteButtonWithUpImage:@"leaderboardsButton" downImage:@"leaderboardsButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.leaderboardsButton setDelegate:self];
+    [self.leaderboardsButton setPosition:CGPointMake(xCenter - 78, yCenter - 78)];
+    [self.leaderboardsButton setEnabled:YES];
+    [self.leaderboardsButton setName:@"leaderboardsButton"];
+    [self addChild:self.leaderboardsButton];
+    
+    self.helpButton = [SKSpriteButton spriteButtonWithUpImage:@"helpButton" downImage:@"helpButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
     [self.helpButton setDelegate:self];
-    [self.helpButton setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) - 100)];
-    [self.helpButton setText:@"Help"];
-    [self.helpButton setFontName:@"AmericanCaptain"];
-    [self.helpButton setName:@"help"];
-    [self.helpButton setFontColor:[UIColor darkGrayColor]];
-    [self.helpButton setFontSize:30.0f];
-    [self.helpButton setUserInteractionEnabled:YES];
+    [self.helpButton setPosition:CGPointMake(xCenter + 78, yCenter - 78)];
+    [self.helpButton setEnabled:YES];
+    [self.helpButton setName:@"helpButton"];
     [self addChild:self.helpButton];
     
 }
 
 /*
- * For the SKLabelButtonDelegate
+ * Called from the SKSpriteButton delegate
  */
-- (void)buttonHit:(SKLabelButton *)button
+- (void)buttonHit:(SKSpriteButton *)button
 {
-    if ([button.name isEqualToString:@"play"]) {
-        NSLog(@"Play Button Hit");
-        
+    if ([button.name isEqualToString:@"infinityModeButton"]) {
         // Present the game scene
         GameScene *gs = [[GameScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
         [self.view presentScene:gs transition:transition];
-        
-    } else if ([button.name isEqualToString:@"highScores"]) {
-        NSLog(@"High Scores Button Hit");
-    } else if ([button.name isEqualToString:@"help"]) {
-        NSLog(@"Help Button Hit");
     }
+}
+
+/*
+ * For the SKLabelButtonDelegate
+ */
+- (void)labelButtonHit:(SKLabelButton *)button
+{
+    // Do something.
 }
 
 /*

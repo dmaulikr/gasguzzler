@@ -46,8 +46,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     if (self.isOnButton) {
-        if ([self.delegate respondsToSelector:@selector(buttonHit:)]) {
-            [self.delegate buttonHit:self];
+        if ([self.delegate respondsToSelector:@selector(labelButtonHit:)]) {
+            [self.delegate labelButtonHit:self];
         }
     }
     self.fontColor = self.upColor;

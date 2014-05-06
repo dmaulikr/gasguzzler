@@ -12,7 +12,7 @@
 
 @protocol SKLabelButtonDelegate <NSObject>
 
-- (void)buttonHit:(SKLabelButton *)button;
+- (void)labelButtonHit:(SKLabelButton *)button;
 
 @end
 

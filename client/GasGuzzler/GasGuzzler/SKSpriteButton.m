@@ -40,6 +40,7 @@
     newButton.downSprite = downSprite;
     [newButton addChild:downSprite];
     
+    if (!disabledImage || [disabledImage isEqualToString:@""]) disabledImage = @"disabledImage";
     SKSpriteNode *disabledSprite = [SKSpriteNode spriteNodeWithImageNamed:disabledImage];
     newButton.disabledSprite = disabledSprite;
     [newButton addChild:disabledSprite];
