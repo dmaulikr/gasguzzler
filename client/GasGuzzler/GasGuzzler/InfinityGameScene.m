@@ -36,8 +36,8 @@
 
 @implementation InfinityGameScene
 
-static const NSInteger timerFontSize = 75;
-
+static const NSInteger TIMER_FONT_SIZE = 75;
+static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 /*
  * Initialize the scene
  */
@@ -71,7 +71,7 @@ static const NSInteger timerFontSize = 75;
 {
     self.gameTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     self.gameTimeLabel.text = @"00.00.00";
-    self.gameTimeLabel.fontSize = timerFontSize;
+    self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
     self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor lightGrayColor]];
@@ -165,6 +165,7 @@ static const NSInteger timerFontSize = 75;
 {
     self.startTime = [NSDate date];
     self.secondsElapsed = -1;
+    self.lastSecondHit = -1;
     self.isOpenForHit = NO;
     self.hasHitForSecond = NO;
     
@@ -192,11 +193,14 @@ static const NSInteger timerFontSize = 75;
     // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
         self.secondsElapsed = (int)timeInterval;
+        if (self.secondsElapsed - 1 != self.lastSecondHit) {
+            NSLog(@"SKIPPED!");
+        }
     }
     
-    if (self.secondsElapsed == 0 && (currentMilliseconds >= 1000 - self.timeThreshold)) {
+    if (self.secondsElapsed == 0 && (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold)) {
         self.isOpenForHit = YES;
-    } else if ((currentMilliseconds >= 1000 - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
+    } else if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
         self.isOpenForHit = YES;
     } else {
         self.isOpenForHit = NO;
@@ -211,6 +215,11 @@ static const NSInteger timerFontSize = 75;
     NSString *hitTimeString = [self.gameTimeLabel text];
 
     NSInteger currentMilliseconds = [[hitTimeString substringFromIndex:[hitTimeString length] - 2] integerValue];
+    NSInteger currentSecond = [[[hitTimeString substringFromIndex:3] substringToIndex:2] integerValue];
+    NSInteger currentMinute = [[[hitTimeString substringFromIndex:0] substringToIndex:2] integerValue];
+    NSInteger totalSeconds = (currentMinute * 60) + currentSecond;
+    
+//    NSLog(@"Current Second: %d", (int)totalSeconds);
     currentMilliseconds *= 10;
     
     // Find the hit color for the floaty text
@@ -220,27 +229,33 @@ static const NSInteger timerFontSize = 75;
     // From 900--0 or 0-100
     if (self.isOpenForHit) {
         
-        NSLog(@"Current Milliseconds: %d", (int)currentMilliseconds);
+//        NSLog(@"Current Milliseconds: %d", (int)currentMilliseconds);
         
         if (currentMilliseconds == 0) {
-            NSLog(@"Perfect Hit!");
-        } else if (currentMilliseconds >= 1000 - self.timeThreshold) {
-            NSLog(@"Under Hit!");
+            
+            self.lastSecondHit = totalSeconds;
+            NSLog(@"Perfect Hit at %d second(s)!", (int)self.lastSecondHit);
+        } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
+            
+            self.lastSecondHit = totalSeconds + 1;
+            NSLog(@"Under Hit at %d second(s)!", (int)self.lastSecondHit);
         } else {
-            NSLog(@"Over Hit!");
+            
+            self.lastSecondHit = totalSeconds;
+            NSLog(@"Over Hit at %d second(s)!", (int)self.lastSecondHit);
         }
         
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
         self.hasHitForSecond = YES;
     } else {
-        NSLog(@"Missed hit");
+//        NSLog(@"Missed hit");
     }
     
     
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     hitTimeLabel.text = hitTimeString;
-    hitTimeLabel.fontSize = timerFontSize;
+    hitTimeLabel.fontSize = TIMER_FONT_SIZE;
     hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
     [hitTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [hitTimeLabel setFontColor:hitColor];
