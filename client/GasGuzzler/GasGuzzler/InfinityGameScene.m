@@ -91,7 +91,7 @@ static const NSInteger COUNTDOWN_TIME = 3;
 - (void)setupCountDownLabel
 {
     self.countDownLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    self.countDownLabel.text = [NSString stringWithFormat:@"%d", COUNTDOWN_TIME];
+    self.countDownLabel.text = [NSString stringWithFormat:@"%d", (int)COUNTDOWN_TIME];
     self.countDownLabel.fontSize = 100;
     self.countDownLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 10, CGRectGetMidY(self.frame) - 15);
     [self.countDownLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
