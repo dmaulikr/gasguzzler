@@ -36,6 +36,11 @@
 
 @implementation InfinityGameScene
 
+typedef enum gameEndings {
+    kSkippedSecond,
+    kMissedHit
+} GameEnder;
+
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 /*
@@ -164,8 +169,8 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 - (void)startGame
 {
     self.startTime = [NSDate date];
-    self.secondsElapsed = -1;
-    self.lastSecondHit = -1;
+    self.secondsElapsed = 0;
+    self.lastSecondHit = 0;
     self.isOpenForHit = NO;
     self.hasHitForSecond = NO;
     
@@ -192,11 +197,15 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
     
     // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
+
         self.secondsElapsed = (int)timeInterval;
-        if (self.secondsElapsed - 1 != self.lastSecondHit) {
-            NSLog(@"SKIPPED!");
+
+        if (self.secondsElapsed - 2 >= self.lastSecondHit) {
+            [self triggerGameEndFrom:kSkippedSecond];
         }
+        
     }
+    
     
     if (self.secondsElapsed == 0 && (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold)) {
         self.isOpenForHit = YES;
@@ -205,6 +214,23 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
     } else {
         self.isOpenForHit = NO;
     }
+}
+
+/*
+ * Trigger game end
+ */
+- (void)triggerGameEndFrom:(GameEnder)reason
+{
+    [self.tapButton setEnabled:NO];
+
+    if (reason == kMissedHit) {
+        
+    } else if (reason == kSkippedSecond) {
+        
+    }
+    
+    [self.gameTimer invalidate];
+    NSLog(@"GAME OVER");
 }
 
 /*
@@ -234,21 +260,21 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
         if (currentMilliseconds == 0) {
             
             self.lastSecondHit = totalSeconds;
-            NSLog(@"Perfect Hit at %d second(s)!", (int)self.lastSecondHit);
+            NSLog(@"Perfect Hit at %d millisecond(s)!", (int)currentMilliseconds);
         } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
             
             self.lastSecondHit = totalSeconds + 1;
-            NSLog(@"Under Hit at %d second(s)!", (int)self.lastSecondHit);
+            NSLog(@"Under Hit at %d millisecond(s)!", (int)currentMilliseconds);
         } else {
             
             self.lastSecondHit = totalSeconds;
-            NSLog(@"Over Hit at %d second(s)!", (int)self.lastSecondHit);
+            NSLog(@"Over Hit at %d millisecond(s)!", (int)currentMilliseconds);
         }
         
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
         self.hasHitForSecond = YES;
     } else {
-//        NSLog(@"Missed hit");
+        [self triggerGameEndFrom:kMissedHit];
     }
     
     
