@@ -202,9 +202,7 @@ static const NSInteger COUNTDOWN_TIME = 3;
 
         self.secondsElapsed = (int)timeInterval;
 
-        if (self.secondsElapsed - 2 >= self.lastSecondHit) {
-            [self triggerGameEndFrom:kSkippedSecond];
-        }
+        
         
     }
     
@@ -214,6 +212,9 @@ static const NSInteger COUNTDOWN_TIME = 3;
         self.isOpenForHit = YES;
     } else {
         self.isOpenForHit = NO;
+        if (self.secondsElapsed - 1 >= self.lastSecondHit) {
+            [self triggerGameEndFrom:kSkippedSecond];
+        }
     }
 }
 
