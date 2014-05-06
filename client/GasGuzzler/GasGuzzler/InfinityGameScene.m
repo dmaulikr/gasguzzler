@@ -23,6 +23,7 @@
 @property (nonatomic) NSInteger secondsElapsed;
 
 @property (nonatomic, strong) SKSpriteButton *tapButton;
+@property (nonatomic, strong) SKSpriteButton *backButton;
 
 
 // Value in milliseconds
@@ -31,6 +32,8 @@
 @end
 
 @implementation InfinityGameScene
+
+static const NSInteger timerFontSize = 75;
 
 /*
  * Initialize the scene
@@ -45,6 +48,7 @@
         [self setupGameTimeLabel];
         [self setupCountDownLabel];
         [self setupTapButton];
+        [self setupBackButton];
         
         // Set the time buffer to 100 milliseconds for now
         self.timeThreshold = 100;
@@ -64,8 +68,8 @@
 {
     self.gameTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     self.gameTimeLabel.text = @"00.00.00";
-    self.gameTimeLabel.fontSize = 50;
-    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 75, CGRectGetMidY(self.frame) + 100);
+    self.gameTimeLabel.fontSize = timerFontSize;
+    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor lightGrayColor]];
     [self addChild:self.gameTimeLabel];
@@ -92,12 +96,27 @@
 {
     self.tapButton = [SKSpriteButton spriteButtonWithUpImage:@"tapButton" downImage:@"tapButtonPressed" disabledImage:@"tapButtonDisabled" buttonMode:kTouchDownInside];
     [self.tapButton setDelegate:self];
-    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170) ];
     [self.tapButton setEnabled:NO];
+    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170)];
     [self.tapButton setName:@"tapButton"];
     
     [self addChild:self.tapButton];
 }
+
+/*
+ * Add the back button
+ */
+- (void)setupBackButton
+{
+    self.backButton = [SKSpriteButton spriteButtonWithUpImage:@"backButton" downImage:@"backButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.backButton setDelegate:self];
+    [self.backButton setPosition:CGPointMake(self.tapButton.frame.size.width + 50, self.frame.size.height - (self.tapButton.frame.size.height/2) - 60) ];
+    [self.backButton setEnabled:YES];
+    [self.backButton setName:@"backButton"];
+    
+    [self addChild:self.backButton];
+}
+
 
 /*
  * Start the countdown to begin
@@ -213,8 +232,8 @@
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     hitTimeLabel.text = hitTimeString;
-    hitTimeLabel.fontSize = 50;
-    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 75, CGRectGetMidY(self.frame) + 100);
+    hitTimeLabel.fontSize = timerFontSize;
+    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
     [hitTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [hitTimeLabel setFontColor:hitColor];
     [hitTimeLabel setZPosition:-1];
