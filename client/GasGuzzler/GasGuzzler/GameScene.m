@@ -23,7 +23,6 @@
 @property (nonatomic, strong) SKSpriteButton *tapButton;
 
 @property (nonatomic) BOOL hasHitForCurrentSecond;
-@property (nonatomic) BOOL currentSecondIsOpenForHit;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -143,8 +142,7 @@
 {
     self.startTime = [NSDate date];
     self.secondsElapsed = -1;
-    self.hasHitForCurrentSecond = NO;
-    self.currentSecondIsOpenForHit = NO;
+    self.hasHitForCurrentSecond = YES;
     
     self.gameTimer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(updateGameTimer:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.gameTimer forMode:NSDefaultRunLoopMode];
@@ -164,8 +162,6 @@
     // Get the milliseconds and the timer string
     NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
     NSString *timeString = [timerDate getTimerString];
-    
-    
     [self.gameTimeLabel setText:timeString];
     
     // Set the elapsed seconds
@@ -173,14 +169,9 @@
         self.secondsElapsed = (int)timeInterval;
     }
     
-    if (self.secondsElapsed == 0 && (currentMilliseconds >= 1000 - self.timeThreshold)) {
-        self.currentSecondIsOpenForHit = YES;
-    } else if (self.secondsElapsed >= 1 && ((currentMilliseconds >= 1000 - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold))) {
-        self.currentSecondIsOpenForHit = YES;
-    } else {
-        self.currentSecondIsOpenForHit = NO;
+    // Open it up for the current seconds
+    if (currentMilliseconds == self.timeThreshold && self.hasHitForCurrentSecond == YES) {
         self.hasHitForCurrentSecond = NO;
-        [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     }
 }
 
@@ -190,7 +181,6 @@
 - (void)buttonHit:(SKSpriteButton *)button
 {
     if ([button.name isEqualToString:@"tapButton"]) {
-        NSLog(@"Button Hit");
         [self registerTapButtonHit];
     }
 }
@@ -200,17 +190,28 @@
  */
 - (void)registerTapButtonHit
 {
-    // Find the hit color for the floaty text
-    UIColor *hitColor;
-    if (self.currentSecondIsOpenForHit && self.hasHitForCurrentSecond == NO) {
-        self.hasHitForCurrentSecond = YES;
-        hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
-    } else hitColor = [UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1];
-    
     // Find out how far user is from current second
     NSDate *timeOfTap = [NSDate date];
     NSTimeInterval timeInterval = [timeOfTap timeIntervalSinceDate:self.startTime];
     NSDate *timeSinceStart = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    
+    NSInteger currentMilliseconds = [timeSinceStart getMillisecondsForCurrentSecond];
+    
+    // Find the hit color for the floaty text
+    UIColor *hitColor;
+    hitColor = [UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1];
+    
+    // From 900--0 or 0-100
+    if (self.secondsElapsed == 0 && (currentMilliseconds >= 1000 - self.timeThreshold)) {
+        self.hasHitForCurrentSecond = YES;
+        hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
+    } else if ((currentMilliseconds >= 1000 - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
+        self.hasHitForCurrentSecond = YES;
+        hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
+    } else {
+        self.hasHitForCurrentSecond = YES;
+    }
+    
     NSString *hitTimeString = [timeSinceStart getTimerString];
     
     // Spawn a sprite of the time
