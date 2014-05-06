@@ -1,0 +1,531 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
+		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
+		AFC439E319170CD100726778 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E219170CD100726778 /* UIKit.framework */; };
+		AFC439E519170CD100726778 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E419170CD100726778 /* SpriteKit.framework */; };
+		AFC439EB19170CD100726778 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFC439E919170CD100726778 /* InfoPlist.strings */; };
+		AFC439ED19170CD100726778 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC439EC19170CD100726778 /* main.m */; };
+		AFC439F119170CD100726778 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC439F019170CD100726778 /* AppDelegate.m */; };
+		AFC439F419170CD100726778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC439F219170CD100726778 /* Main.storyboard */; };
+		AFC439FC19170CD100726778 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC439FB19170CD100726778 /* Spaceship.png */; };
+		AFC439FE19170CD100726778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC439FD19170CD100726778 /* Images.xcassets */; };
+		AFC43A0519170CD100726778 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC43A0419170CD100726778 /* XCTest.framework */; };
+		AFC43A0619170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
+		AFC43A0719170CD100726778 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E219170CD100726778 /* UIKit.framework */; };
+		AFC43A0F19170CD100726778 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFC43A0D19170CD100726778 /* InfoPlist.strings */; };
+		AFC43A1119170CD100726778 /* GasGuzzlerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC43A1019170CD100726778 /* GasGuzzlerTests.m */; };
+		AFC43A1D19170ED500726778 /* calculator.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFC43A1C19170ED500726778 /* calculator.ttf */; };
+		AFF7705319183551004E4AE5 /* american_captain.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AFF7705219183551004E4AE5 /* american_captain.ttf */; };
+		AFF7705619183602004E4AE5 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705519183602004E4AE5 /* MenuScene.m */; };
+		AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF77058191837C1004E4AE5 /* SKLabelButton.m */; };
+		AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705B19183DFC004E4AE5 /* RootViewController.m */; };
+		AFF7705F19183E4A004E4AE5 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7705E19183E4A004E4AE5 /* GameScene.m */; };
+		AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7706119184B81004E4AE5 /* SKSpriteButton.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AFC43A0819170CD100726778 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFC439D319170CD100726778 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFC439DA19170CD100726778;
+			remoteInfo = GasGuzzler;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AFC439E019170CD100726778 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AFC439E219170CD100726778 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AFC439E419170CD100726778 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		AFC439E819170CD100726778 /* GasGuzzler-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GasGuzzler-Info.plist"; sourceTree = "<group>"; };
+		AFC439EA19170CD100726778 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFC439EC19170CD100726778 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AFC439EE19170CD100726778 /* GasGuzzler-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GasGuzzler-Prefix.pch"; sourceTree = "<group>"; };
+		AFC439EF19170CD100726778 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		AFC439F019170CD100726778 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		AFC439F319170CD100726778 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AFC439FB19170CD100726778 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		AFC439FD19170CD100726778 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AFC43A0319170CD100726778 /* GasGuzzlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GasGuzzlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFC43A0419170CD100726778 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AFC43A0C19170CD100726778 /* GasGuzzlerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GasGuzzlerTests-Info.plist"; sourceTree = "<group>"; };
+		AFC43A0E19170CD100726778 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFC43A1019170CD100726778 /* GasGuzzlerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GasGuzzlerTests.m; sourceTree = "<group>"; };
+		AFC43A1C19170ED500726778 /* calculator.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = calculator.ttf; sourceTree = "<group>"; };
+		AFF7705219183551004E4AE5 /* american_captain.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = american_captain.ttf; sourceTree = "<group>"; };
+		AFF7705419183602004E4AE5 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		AFF7705519183602004E4AE5 /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
+		AFF77057191837C1004E4AE5 /* SKLabelButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKLabelButton.h; sourceTree = "<group>"; };
+		AFF77058191837C1004E4AE5 /* SKLabelButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKLabelButton.m; sourceTree = "<group>"; };
+		AFF7705A19183DFC004E4AE5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		AFF7705B19183DFC004E4AE5 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		AFF7705D19183E4A004E4AE5 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		AFF7705E19183E4A004E4AE5 /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		AFF7706019184B81004E4AE5 /* SKSpriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKSpriteButton.h; sourceTree = "<group>"; };
+		AFF7706119184B81004E4AE5 /* SKSpriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKSpriteButton.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AFC439D819170CD100726778 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */,
+				AFC439E319170CD100726778 /* UIKit.framework in Frameworks */,
+				AFC439E519170CD100726778 /* SpriteKit.framework in Frameworks */,
+				AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFC43A0019170CD100726778 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC43A0519170CD100726778 /* XCTest.framework in Frameworks */,
+				AFC43A0719170CD100726778 /* UIKit.framework in Frameworks */,
+				AFC43A0619170CD100726778 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AFC439D219170CD100726778 = {
+			isa = PBXGroup;
+			children = (
+				AFC439E619170CD100726778 /* GasGuzzler */,
+				AFC43A0A19170CD100726778 /* GasGuzzlerTests */,
+				AFC439DD19170CD100726778 /* Frameworks */,
+				AFC439DC19170CD100726778 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AFC439DC19170CD100726778 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFC439DB19170CD100726778 /* GasGuzzler.app */,
+				AFC43A0319170CD100726778 /* GasGuzzlerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AFC439DD19170CD100726778 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AFC439DE19170CD100726778 /* Foundation.framework */,
+				AFC439E019170CD100726778 /* CoreGraphics.framework */,
+				AFC439E219170CD100726778 /* UIKit.framework */,
+				AFC439E419170CD100726778 /* SpriteKit.framework */,
+				AFC43A0419170CD100726778 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFC439E619170CD100726778 /* GasGuzzler */ = {
+			isa = PBXGroup;
+			children = (
+				AFC439EF19170CD100726778 /* AppDelegate.h */,
+				AFC439F019170CD100726778 /* AppDelegate.m */,
+				AFC439F219170CD100726778 /* Main.storyboard */,
+				AFF7705A19183DFC004E4AE5 /* RootViewController.h */,
+				AFF7705B19183DFC004E4AE5 /* RootViewController.m */,
+				AFF7705D19183E4A004E4AE5 /* GameScene.h */,
+				AFF7705E19183E4A004E4AE5 /* GameScene.m */,
+				AFF7705419183602004E4AE5 /* MenuScene.h */,
+				AFF7705519183602004E4AE5 /* MenuScene.m */,
+				AFF77057191837C1004E4AE5 /* SKLabelButton.h */,
+				AFF77058191837C1004E4AE5 /* SKLabelButton.m */,
+				AFF7706019184B81004E4AE5 /* SKSpriteButton.h */,
+				AFF7706119184B81004E4AE5 /* SKSpriteButton.m */,
+				AFC439FB19170CD100726778 /* Spaceship.png */,
+				AFC439FD19170CD100726778 /* Images.xcassets */,
+				AFC43A1A19170EC500726778 /* Resources */,
+				AFC439E719170CD100726778 /* Supporting Files */,
+			);
+			path = GasGuzzler;
+			sourceTree = "<group>";
+		};
+		AFC439E719170CD100726778 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AFC439E819170CD100726778 /* GasGuzzler-Info.plist */,
+				AFC439E919170CD100726778 /* InfoPlist.strings */,
+				AFC439EC19170CD100726778 /* main.m */,
+				AFC439EE19170CD100726778 /* GasGuzzler-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AFC43A0A19170CD100726778 /* GasGuzzlerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFC43A1019170CD100726778 /* GasGuzzlerTests.m */,
+				AFC43A0B19170CD100726778 /* Supporting Files */,
+			);
+			path = GasGuzzlerTests;
+			sourceTree = "<group>";
+		};
+		AFC43A0B19170CD100726778 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AFC43A0C19170CD100726778 /* GasGuzzlerTests-Info.plist */,
+				AFC43A0D19170CD100726778 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AFC43A1A19170EC500726778 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AFC43A1B19170ECE00726778 /* Fonts */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		AFC43A1B19170ECE00726778 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AFF7705219183551004E4AE5 /* american_captain.ttf */,
+				AFC43A1C19170ED500726778 /* calculator.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AFC439DA19170CD100726778 /* GasGuzzler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFC43A1419170CD100726778 /* Build configuration list for PBXNativeTarget "GasGuzzler" */;
+			buildPhases = (
+				AFC439D719170CD100726778 /* Sources */,
+				AFC439D819170CD100726778 /* Frameworks */,
+				AFC439D919170CD100726778 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GasGuzzler;
+			productName = GasGuzzler;
+			productReference = AFC439DB19170CD100726778 /* GasGuzzler.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AFC43A0219170CD100726778 /* GasGuzzlerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFC43A1719170CD100726778 /* Build configuration list for PBXNativeTarget "GasGuzzlerTests" */;
+			buildPhases = (
+				AFC439FF19170CD100726778 /* Sources */,
+				AFC43A0019170CD100726778 /* Frameworks */,
+				AFC43A0119170CD100726778 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFC43A0919170CD100726778 /* PBXTargetDependency */,
+			);
+			name = GasGuzzlerTests;
+			productName = GasGuzzlerTests;
+			productReference = AFC43A0319170CD100726778 /* GasGuzzlerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AFC439D319170CD100726778 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Raymond kennedy";
+				TargetAttributes = {
+					AFC43A0219170CD100726778 = {
+						TestTargetID = AFC439DA19170CD100726778;
+					};
+				};
+			};
+			buildConfigurationList = AFC439D619170CD100726778 /* Build configuration list for PBXProject "GasGuzzler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AFC439D219170CD100726778;
+			productRefGroup = AFC439DC19170CD100726778 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AFC439DA19170CD100726778 /* GasGuzzler */,
+				AFC43A0219170CD100726778 /* GasGuzzlerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AFC439D919170CD100726778 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC439EB19170CD100726778 /* InfoPlist.strings in Resources */,
+				AFC439FE19170CD100726778 /* Images.xcassets in Resources */,
+				AFC439FC19170CD100726778 /* Spaceship.png in Resources */,
+				AFF7705319183551004E4AE5 /* american_captain.ttf in Resources */,
+				AFC43A1D19170ED500726778 /* calculator.ttf in Resources */,
+				AFC439F419170CD100726778 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFC43A0119170CD100726778 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC43A0F19170CD100726778 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AFC439D719170CD100726778 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */,
+				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
+				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
+				AFF7705619183602004E4AE5 /* MenuScene.m in Sources */,
+				AFC439F119170CD100726778 /* AppDelegate.m in Sources */,
+				AFF7705F19183E4A004E4AE5 /* GameScene.m in Sources */,
+				AFC439ED19170CD100726778 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFC439FF19170CD100726778 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFC43A1119170CD100726778 /* GasGuzzlerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFC43A0919170CD100726778 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFC439DA19170CD100726778 /* GasGuzzler */;
+			targetProxy = AFC43A0819170CD100726778 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AFC439E919170CD100726778 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFC439EA19170CD100726778 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AFC439F219170CD100726778 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFC439F319170CD100726778 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AFC43A0D19170CD100726778 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFC43A0E19170CD100726778 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AFC43A1219170CD100726778 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AFC43A1319170CD100726778 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AFC43A1519170CD100726778 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
+				INFOPLIST_FILE = "GasGuzzler/GasGuzzler-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AFC43A1619170CD100726778 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
+				INFOPLIST_FILE = "GasGuzzler/GasGuzzler-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		AFC43A1819170CD100726778 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GasGuzzler.app/GasGuzzler";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GasGuzzlerTests/GasGuzzlerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AFC43A1919170CD100726778 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GasGuzzler.app/GasGuzzler";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
+				INFOPLIST_FILE = "GasGuzzlerTests/GasGuzzlerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AFC439D619170CD100726778 /* Build configuration list for PBXProject "GasGuzzler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFC43A1219170CD100726778 /* Debug */,
+				AFC43A1319170CD100726778 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFC43A1419170CD100726778 /* Build configuration list for PBXNativeTarget "GasGuzzler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFC43A1519170CD100726778 /* Debug */,
+				AFC43A1619170CD100726778 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFC43A1719170CD100726778 /* Build configuration list for PBXNativeTarget "GasGuzzlerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFC43A1819170CD100726778 /* Debug */,
+				AFC43A1919170CD100726778 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AFC439D319170CD100726778 /* Project object */;
+}
