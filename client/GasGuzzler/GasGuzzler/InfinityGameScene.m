@@ -43,6 +43,8 @@ typedef enum gameEndings {
 
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
+static const NSInteger COUNTDOWN_TIME = 3;
+
 /*
  * Initialize the scene
  */
@@ -89,7 +91,7 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 - (void)setupCountDownLabel
 {
     self.countDownLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    self.countDownLabel.text = @"5";
+    self.countDownLabel.text = [NSString stringWithFormat:@"%d", COUNTDOWN_TIME];
     self.countDownLabel.fontSize = 100;
     self.countDownLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 10, CGRectGetMidY(self.frame) - 15);
     [self.countDownLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
@@ -206,7 +208,6 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
         
     }
     
-    
     if (self.secondsElapsed == 0 && (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold)) {
         self.isOpenForHit = YES;
     } else if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
@@ -228,6 +229,8 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
     } else if (reason == kSkippedSecond) {
         
     }
+    
+    [self.gameTimeLabel setFontColor:[UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1]];
     
     [self.gameTimer invalidate];
     NSLog(@"GAME OVER");
@@ -275,6 +278,7 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
         self.hasHitForSecond = YES;
     } else {
         [self triggerGameEndFrom:kMissedHit];
+        return;
     }
     
     
