@@ -8,7 +8,7 @@
 
 #import "GameScene.h"
 #import "SKSpriteButton.h"
-
+#import "NSDate+Utils.h"
 @interface GameScene () <SKSpriteButtonDelegate>
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
@@ -155,26 +155,20 @@
  * Updates the timer displayed on the screen
  */
 - (void)updateGameTimer:(NSTimer *)timer {
+    
+    // Get the current time on the timer
     NSDate *currentTime = [NSDate date];
     NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
-    // Set the date format to SSS to get the milliseconds for the current date
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"SSS"];
-    [df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
+    // Get the milliseconds and the timer string
+    NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
+    NSString *timeString = [timerDate getTimerString];
     
-    NSInteger currentMilliseconds = [[df stringFromDate:timerDate] intValue];
     
-    // set the date format to display the hit date
-    [df setDateFormat:@"mm.ss.SS"];
-    
-    // Display the timer
-    [df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *timeString = [df stringFromDate:timerDate];
     [self.gameTimeLabel setText:timeString];
     
-    // Set the elapsed seconds and the current second
+    // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
         self.secondsElapsed = (int)timeInterval;
     }
@@ -206,8 +200,8 @@
  */
 - (void)registerTapButtonHit
 {
+    // Find the hit color for the floaty text
     UIColor *hitColor;
-    
     if (self.currentSecondIsOpenForHit && self.hasHitForCurrentSecond == NO) {
         self.hasHitForCurrentSecond = YES;
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
@@ -217,11 +211,7 @@
     NSDate *timeOfTap = [NSDate date];
     NSTimeInterval timeInterval = [timeOfTap timeIntervalSinceDate:self.startTime];
     NSDate *timeSinceStart = [NSDate dateWithTimeIntervalSince1970:timeInterval];
-    
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"mm.ss.SS"];
-    [df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0.0]];
-    NSString *hitTimeString = [df stringFromDate:timeSinceStart];
+    NSString *hitTimeString = [timeSinceStart getTimerString];
     
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];

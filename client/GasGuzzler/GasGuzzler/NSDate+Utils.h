@@ -10,4 +10,10 @@
 
 @interface NSDate (Utils)
 
+// Returns the milliseconds for the current second (number is < 1000)
+- (NSInteger)getMillisecondsForCurrentSecond;
+
+// Returns the date in timer form
+- (NSString *)getTimerString;
+
 @end
