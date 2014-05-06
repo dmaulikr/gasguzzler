@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF57DDE219189C2800674CD5 /* NSDate+Utils.m */; };
 		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
 		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
 		AFC439E319170CD100726778 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E219170CD100726778 /* UIKit.framework */; };
@@ -15,7 +16,6 @@
 		AFC439ED19170CD100726778 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC439EC19170CD100726778 /* main.m */; };
 		AFC439F119170CD100726778 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC439F019170CD100726778 /* AppDelegate.m */; };
 		AFC439F419170CD100726778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC439F219170CD100726778 /* Main.storyboard */; };
-		AFC439FC19170CD100726778 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = AFC439FB19170CD100726778 /* Spaceship.png */; };
 		AFC439FE19170CD100726778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC439FD19170CD100726778 /* Images.xcassets */; };
 		AFC43A0519170CD100726778 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC43A0419170CD100726778 /* XCTest.framework */; };
 		AFC43A0619170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
@@ -42,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF57DDE119189C2800674CD5 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		AF57DDE219189C2800674CD5 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFC439E019170CD100726778 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,7 +56,6 @@
 		AFC439EF19170CD100726778 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFC439F019170CD100726778 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AFC439F319170CD100726778 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AFC439FB19170CD100726778 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		AFC439FD19170CD100726778 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFC43A0319170CD100726778 /* GasGuzzlerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GasGuzzlerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC43A0419170CD100726778 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -100,6 +101,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF57DDDD19189BDE00674CD5 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				AFF7705D19183E4A004E4AE5 /* GameScene.h */,
+				AFF7705E19183E4A004E4AE5 /* GameScene.m */,
+				AFF7705419183602004E4AE5 /* MenuScene.h */,
+				AFF7705519183602004E4AE5 /* MenuScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		AF57DDDE19189BE500674CD5 /* Custom Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				AFF77057191837C1004E4AE5 /* SKLabelButton.h */,
+				AFF77058191837C1004E4AE5 /* SKLabelButton.m */,
+				AFF7706019184B81004E4AE5 /* SKSpriteButton.h */,
+				AFF7706119184B81004E4AE5 /* SKSpriteButton.m */,
+			);
+			name = "Custom Subclasses";
+			sourceTree = "<group>";
+		};
+		AF57DDDF19189BFD00674CD5 /* App Delegate/Storyboad/etc... */ = {
+			isa = PBXGroup;
+			children = (
+				AFC439EF19170CD100726778 /* AppDelegate.h */,
+				AFC439F019170CD100726778 /* AppDelegate.m */,
+				AFC439F219170CD100726778 /* Main.storyboard */,
+				AFF7705A19183DFC004E4AE5 /* RootViewController.h */,
+				AFF7705B19183DFC004E4AE5 /* RootViewController.m */,
+			);
+			name = "App Delegate/Storyboad/etc...";
+			sourceTree = "<group>";
+		};
+		AF57DDE019189C1700674CD5 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AF57DDE119189C2800674CD5 /* NSDate+Utils.h */,
+				AF57DDE219189C2800674CD5 /* NSDate+Utils.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		AFC439D219170CD100726778 = {
 			isa = PBXGroup;
 			children = (
@@ -134,20 +178,10 @@
 		AFC439E619170CD100726778 /* GasGuzzler */ = {
 			isa = PBXGroup;
 			children = (
-				AFC439EF19170CD100726778 /* AppDelegate.h */,
-				AFC439F019170CD100726778 /* AppDelegate.m */,
-				AFC439F219170CD100726778 /* Main.storyboard */,
-				AFF7705A19183DFC004E4AE5 /* RootViewController.h */,
-				AFF7705B19183DFC004E4AE5 /* RootViewController.m */,
-				AFF7705D19183E4A004E4AE5 /* GameScene.h */,
-				AFF7705E19183E4A004E4AE5 /* GameScene.m */,
-				AFF7705419183602004E4AE5 /* MenuScene.h */,
-				AFF7705519183602004E4AE5 /* MenuScene.m */,
-				AFF77057191837C1004E4AE5 /* SKLabelButton.h */,
-				AFF77058191837C1004E4AE5 /* SKLabelButton.m */,
-				AFF7706019184B81004E4AE5 /* SKSpriteButton.h */,
-				AFF7706119184B81004E4AE5 /* SKSpriteButton.m */,
-				AFC439FB19170CD100726778 /* Spaceship.png */,
+				AF57DDE019189C1700674CD5 /* Categories */,
+				AF57DDDF19189BFD00674CD5 /* App Delegate/Storyboad/etc... */,
+				AF57DDDE19189BE500674CD5 /* Custom Subclasses */,
+				AF57DDDD19189BDE00674CD5 /* Scenes */,
 				AFC439FD19170CD100726778 /* Images.xcassets */,
 				AFC43A1A19170EC500726778 /* Resources */,
 				AFC439E719170CD100726778 /* Supporting Files */,
@@ -279,7 +313,6 @@
 			files = (
 				AFC439EB19170CD100726778 /* InfoPlist.strings in Resources */,
 				AFC439FE19170CD100726778 /* Images.xcassets in Resources */,
-				AFC439FC19170CD100726778 /* Spaceship.png in Resources */,
 				AFF7705319183551004E4AE5 /* american_captain.ttf in Resources */,
 				AFC43A1D19170ED500726778 /* calculator.ttf in Resources */,
 				AFC439F419170CD100726778 /* Main.storyboard in Resources */,
@@ -305,6 +338,7 @@
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
 				AFF7705619183602004E4AE5 /* MenuScene.m in Sources */,
+				AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */,
 				AFC439F119170CD100726778 /* AppDelegate.m in Sources */,
 				AFF7705F19183E4A004E4AE5 /* GameScene.m in Sources */,
 				AFC439ED19170CD100726778 /* main.m in Sources */,
