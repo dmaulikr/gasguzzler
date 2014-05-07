@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF57DDE219189C2800674CD5 /* NSDate+Utils.m */; };
 		AF57DDE71918A9A400674CD5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF57DDE61918A9A400674CD5 /* GameKit.framework */; };
+		AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */; };
 		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
 		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
 		AFC439E319170CD100726778 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E219170CD100726778 /* UIKit.framework */; };
@@ -53,6 +54,8 @@
 		AF57DDE119189C2800674CD5 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		AF57DDE219189C2800674CD5 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		AF57DDE61918A9A400674CD5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AF7E0994191A047F00E0D808 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
+		AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFC439E019170CD100726778 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -162,6 +165,8 @@
 			children = (
 				AF57DDE119189C2800674CD5 /* NSDate+Utils.h */,
 				AF57DDE219189C2800674CD5 /* NSDate+Utils.m */,
+				AF7E0994191A047F00E0D808 /* UIColor+Extensions.h */,
+				AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -413,6 +418,7 @@
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
 				AFF7705619183602004E4AE5 /* MenuScene.m in Sources */,
+				AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */,
 				AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */,
 				AFC439F119170CD100726778 /* AppDelegate.m in Sources */,
 				AFC439ED19170CD100726778 /* main.m in Sources */,

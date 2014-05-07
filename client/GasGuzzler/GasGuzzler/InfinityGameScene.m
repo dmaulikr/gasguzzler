@@ -10,6 +10,7 @@
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
+#import "UIColor+Extensions.h"
 
 @interface InfinityGameScene () <SKSpriteButtonDelegate>
 
@@ -17,15 +18,13 @@
 @property (nonatomic, strong) NSTimer *gameTimer;
 @property (nonatomic, strong) NSDate *startTime;
 
-@property (nonatomic, strong) SKLabelNode *countDownLabel;
-@property (nonatomic, strong) NSTimer *countDownTimer;
-
 @property (nonatomic) NSInteger secondsElapsed;
 @property (nonatomic) NSInteger lastSecondHit;
 @property (nonatomic) BOOL isOpenForHit;
 @property (nonatomic) BOOL hasHitForSecond;
 
 @property (nonatomic, strong) SKSpriteButton *tapButton;
+@property (nonatomic, strong) SKSpriteButton *beginButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
 
@@ -43,7 +42,7 @@ typedef enum gameEndings {
 
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
-static const NSInteger COUNTDOWN_TIME = 3;
+static const NSInteger TAP_BUTTON_HEIGHT = 20;
 
 /*
  * Initialize the scene
@@ -52,23 +51,34 @@ static const NSInteger COUNTDOWN_TIME = 3;
     if (self = [super initWithSize:size]) {
         
         // Set the background color to white
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];
         
         // Setup the timer label and count down label and the button
         [self setupGameTimeLabel];
-        [self setupCountDownLabel];
         [self setupTapButton];
+        [self setupBeginButton];
         [self setupBackButton];
+        
+        // Hide the tap button @ start
+        [self.tapButton setHidden:NO];
+        [self.beginButton setHidden:NO];
         
         // Set the time buffer to 100 milliseconds for now
         self.timeThreshold = 100;
         
-        // Start the countdown
-        [self performSelector:@selector(startCountDown) withObject:nil afterDelay:1.0f];
-        
     }
     
     return self;
+}
+
+/*
+ * Swaps the z-index of the tap button and begin button
+ */
+- (void)swapZs:(SKSpriteNode *)sprite1 withSprite:(SKSpriteNode *)sprite2
+{
+    int zIndex2 = sprite2.zPosition;
+    sprite2.zPosition = sprite1.zPosition;
+    sprite1.zPosition = zIndex2;
 }
 
 /*
@@ -81,22 +91,8 @@ static const NSInteger COUNTDOWN_TIME = 3;
     self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
     self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
-    [self.gameTimeLabel setFontColor:[UIColor lightGrayColor]];
+    [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self addChild:self.gameTimeLabel];
-}
-
-/*
- * Setup the countdownLabel
- */
-- (void)setupCountDownLabel
-{
-    self.countDownLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    self.countDownLabel.text = [NSString stringWithFormat:@"%d", (int)COUNTDOWN_TIME];
-    self.countDownLabel.fontSize = 100;
-    self.countDownLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 10, CGRectGetMidY(self.frame) - 15);
-    [self.countDownLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
-    [self.countDownLabel setFontColor:[UIColor blackColor]];
-    [self addChild:self.countDownLabel];
 }
 
 /*
@@ -104,13 +100,27 @@ static const NSInteger COUNTDOWN_TIME = 3;
  */
 - (void)setupTapButton
 {
-    self.tapButton = [SKSpriteButton spriteButtonWithUpImage:@"tapButton" downImage:@"tapButtonPressed" disabledImage:@"tapButtonDisabled" buttonMode:kTouchDownInside];
+    self.tapButton = [SKSpriteButton spriteButtonWithUpImage:@"tapButton" downImage:@"tapButtonPressed" disabledImage:nil buttonMode:kTouchDownInside];
     [self.tapButton setDelegate:self];
-    [self.tapButton setEnabled:NO];
     [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170)];
+    [self.tapButton setEnabled:YES];
     [self.tapButton setName:@"tapButton"];
-    
+    [self.tapButton setZPosition:4.0f];
     [self addChild:self.tapButton];
+}
+
+/*
+ * Sets up the begin button / (tap button)
+ */
+- (void)setupBeginButton
+{
+    self.beginButton = [SKSpriteButton spriteButtonWithUpImage:@"beginButton" downImage:@"beginButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.beginButton setDelegate:self];
+    [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170)];
+    [self.beginButton setEnabled:YES];
+    [self.beginButton setName:@"beginButton"];
+    [self.beginButton setZPosition:5.0f];
+    [self addChild:self.beginButton];
 }
 
 /*
@@ -127,44 +137,6 @@ static const NSInteger COUNTDOWN_TIME = 3;
     [self addChild:self.backButton];
 }
 
-
-/*
- * Start the countdown to begin
- */
-- (void)startCountDown
-{
-    self.countDownTimer = [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(updateCountDownTimer:) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:self.countDownTimer forMode:NSDefaultRunLoopMode];
-    [self.countDownTimer fire];
-}
-
-/*
- * Updates the countDownTimer
- */
-- (void)updateCountDownTimer:(NSTimer *)timer
-{
-    NSInteger countDownValue = [self.countDownLabel.text integerValue];
-    countDownValue--;
-    
-    // If we've reached the end of the count down -- begin the game
-    if (countDownValue == 0) {
-        
-        // Enabled the tap button
-        [self.tapButton setEnabled:YES];
-        
-        // Get rid of the countdown timer, and stop firing the timer
-        [self.countDownTimer invalidate];
-        [self.countDownLabel removeFromParent];
-        
-        // Make the gameTime black
-        [self.gameTimeLabel setFontColor:[UIColor blackColor]];
-        
-        [self startGame];
-    } else {
-        [self.countDownLabel setText:[NSString stringWithFormat:@"%d", (int)countDownValue]];
-    }
-}
-
 /*
  * Start the game
  */
@@ -175,6 +147,14 @@ static const NSInteger COUNTDOWN_TIME = 3;
     self.lastSecondHit = 0;
     self.isOpenForHit = NO;
     self.hasHitForSecond = NO;
+    
+    // change the font color
+    [self.gameTimeLabel setFontColor:[UIColor blackColor]];
+    
+    // Unhide the tap button
+    [self.tapButton setHidden:NO];
+    [self.beginButton setHidden:YES];
+    [self swapZs:self.tapButton withSprite:self.beginButton];
     
     self.gameTimer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(updateGameTimer:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.gameTimer forMode:NSDefaultRunLoopMode];
@@ -191,19 +171,15 @@ static const NSInteger COUNTDOWN_TIME = 3;
     NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
     NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     
-    // Get the milliseconds and the timer string
-    NSInteger currentMilliseconds = [timerDate getMillisecondsForCurrentSecond];
-    
     NSString *timeString = [timerDate getTimerString];
+    NSInteger currentMilliseconds = [[timeString substringFromIndex:[timeString length] - 2] integerValue];
+    currentMilliseconds *= 10;
+    
     [self.gameTimeLabel setText:timeString];
     
     // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
-
         self.secondsElapsed = (int)timeInterval;
-
-        
-        
     }
     
     if (self.secondsElapsed == 0 && (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold)) {
@@ -211,11 +187,13 @@ static const NSInteger COUNTDOWN_TIME = 3;
     } else if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
         self.isOpenForHit = YES;
     } else {
+        NSLog(@"Current Milliseconds: %d", (int)currentMilliseconds);
         self.isOpenForHit = NO;
         if (self.secondsElapsed - 1 >= self.lastSecondHit) {
             [self triggerGameEndFrom:kSkippedSecond];
         }
     }
+    
 }
 
 /*
@@ -223,17 +201,21 @@ static const NSInteger COUNTDOWN_TIME = 3;
  */
 - (void)triggerGameEndFrom:(GameEnder)reason
 {
-    [self.tapButton setEnabled:NO];
+    [self.gameTimer invalidate];
+    [self.gameTimeLabel setFontColor:[UIColor gameEndingRed]];
+    [self.beginButton setHidden:NO];
+    [self.tapButton setHidden:YES];
+    [self swapZs:self.tapButton withSprite:self.beginButton];
+    
 
+    
     if (reason == kMissedHit) {
         
     } else if (reason == kSkippedSecond) {
         
     }
     
-    [self.gameTimeLabel setFontColor:[UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1]];
     
-    [self.gameTimer invalidate];
     NSLog(@"GAME OVER");
 }
 
@@ -248,8 +230,6 @@ static const NSInteger COUNTDOWN_TIME = 3;
     NSInteger currentSecond = [[[hitTimeString substringFromIndex:3] substringToIndex:2] integerValue];
     NSInteger currentMinute = [[[hitTimeString substringFromIndex:0] substringToIndex:2] integerValue];
     NSInteger totalSeconds = (currentMinute * 60) + currentSecond;
-    
-//    NSLog(@"Current Second: %d", (int)totalSeconds);
     currentMilliseconds *= 10;
     
     // Find the hit color for the floaty text
@@ -258,8 +238,6 @@ static const NSInteger COUNTDOWN_TIME = 3;
     
     // From 900--0 or 0-100
     if (self.isOpenForHit) {
-        
-//        NSLog(@"Current Milliseconds: %d", (int)currentMilliseconds);
         
         if (currentMilliseconds == 0) {
             
@@ -310,6 +288,9 @@ static const NSInteger COUNTDOWN_TIME = 3;
         [self registerTapButtonHit];
     } else if ([button.name isEqualToString:@"backButton"]) {
         [self leaveScene];
+    } else if ([button.name isEqualToString:@"beginButton"]) {
+        // start the game
+        [self startGame];
     }
 }
 
@@ -320,8 +301,8 @@ static const NSInteger COUNTDOWN_TIME = 3;
 {
     // Invalidate the timers before leavint the scene
     [self.gameTimer invalidate];
-    [self.countDownTimer invalidate];
     
+    // Present the menu scene again
     MenuScene *ms = [[MenuScene alloc] initWithSize:self.frame.size];
     SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionRight duration:0.3f];
     [self.view presentScene:ms transition:transition];
