@@ -11,6 +11,7 @@
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
 #import "UIColor+Extensions.h"
+#import <AudioToolbox/AudioToolbox.h> 
 
 @interface InfinityGameScene () <SKSpriteButtonDelegate>
 
@@ -44,7 +45,8 @@ static const NSInteger TIME_THRESHOLD = 100;
 
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
-static const NSInteger TAP_BUTTON_HEIGHT = 15;
+static const NSInteger TAP_BUTTON_HEIGHT = 25;
+static const NSInteger BUTTON_Z_LEVEL = 4;
 
 /*
  * Initialize the scene
@@ -96,6 +98,8 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
+    [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
+    
     [self addChild:self.gameTimeLabel];
 }
 
@@ -110,7 +114,7 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
     [self.tapButton setEnabled:YES];
     [self.tapButton setName:@"tapButton"];
-    [self.tapButton setZPosition:4.0f];
+    [self.tapButton setZPosition:BUTTON_Z_LEVEL];
     [self addChild:self.tapButton];
 }
 
@@ -125,7 +129,7 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
     [self.beginButton setEnabled:YES];
     [self.beginButton setName:@"beginButton"];
-    [self.beginButton setZPosition:5.0f];
+    [self.beginButton setZPosition:BUTTON_Z_LEVEL + 1];
     [self addChild:self.beginButton];
 }
 
@@ -139,6 +143,7 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     [self.backButton setPosition:CGPointMake(self.tapButton.frame.size.width + 50, self.frame.size.height - (self.tapButton.frame.size.height/2) - 60) ];
     [self.backButton setEnabled:YES];
     [self.backButton setName:@"backButton"];
+    [self.backButton setZPosition:BUTTON_Z_LEVEL];
     
     [self addChild:self.backButton];
 }
@@ -188,9 +193,8 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
         self.secondsElapsed = (int)timeInterval;
     }
     
-    if (self.secondsElapsed == 0 && (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold)) {
-        self.isOpenForHit = YES;
-    } else if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
+    if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
+//        if (currentMilliseconds == 0 && self.secondsElapsed != 0) [self registerTapButtonHit];
         self.isOpenForHit = YES;
     } else {
         self.isOpenForHit = NO;
@@ -248,12 +252,14 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
             
             self.lastSecondHit = totalSeconds;
             NSLog(@"Perfect Hit at %d millisecond(s)!", (int)currentMilliseconds);
-        } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
+            [self flashBackground:[UIColor perfectGreen]];
             
+        } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
             self.lastSecondHit = totalSeconds + 1;
             NSLog(@"Under Hit at %d millisecond(s)!", (int)currentMilliseconds);
         } else {
-            
             self.lastSecondHit = totalSeconds;
             NSLog(@"Over Hit at %d millisecond(s)!", (int)currentMilliseconds);
         }
@@ -270,10 +276,12 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     hitTimeLabel.text = hitTimeString;
     hitTimeLabel.fontSize = TIMER_FONT_SIZE;
-    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
+    CGSize textSize = [@"00.00.00" sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
+    CGFloat strikeWidth = textSize.width;
+    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
     [hitTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [hitTimeLabel setFontColor:hitColor];
-    [hitTimeLabel setZPosition:-1];
+    [hitTimeLabel setZPosition:BUTTON_Z_LEVEL - 2];
     [self addChild:hitTimeLabel];
     
     SKAction *fadeOut = [SKAction fadeOutWithDuration:1.3f];
@@ -281,6 +289,25 @@ static const NSInteger TAP_BUTTON_HEIGHT = 15;
     SKAction *tween = [SKAction group:[NSArray arrayWithObjects:fadeOut, moveUp, nil]];
     [hitTimeLabel runAction:tween completion:^{
         [hitTimeLabel removeFromParent];
+    }];
+}
+
+/*
+ * Flashes the background a color
+ */
+- (void)flashBackground:(UIColor *)color
+{
+    SKSpriteNode *bgFlash = [SKSpriteNode spriteNodeWithColor:color size:self.size];
+    [bgFlash setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+    [bgFlash setZPosition:1];
+    [bgFlash setAlpha:0.0f];
+    [self addChild:bgFlash];
+    
+    SKAction *fadeIn = [SKAction fadeAlphaTo:1.0f duration:.1f];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:.1f];
+    SKAction *sequence = [SKAction sequence:[NSArray arrayWithObjects:fadeIn, fadeOut, nil]];
+    [bgFlash runAction:sequence completion:^{
+        [bgFlash removeFromParent];
     }];
 }
 

@@ -15,4 +15,9 @@
     return [UIColor colorWithRed:0.91 green:0.32 blue:0.26 alpha:1];
 }
 
++ (UIColor *)perfectGreen
+{
+    return [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
+}
+
 @end

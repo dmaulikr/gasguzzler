@@ -11,5 +11,6 @@
 @interface UIColor (Extensions)
 
 + (UIColor *)gameEndingRed;
++ (UIColor *)perfectGreen;
 
 @end
