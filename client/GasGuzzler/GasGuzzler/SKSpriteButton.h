@@ -34,4 +34,7 @@ typedef enum buttonModes {
 
 + (SKSpriteButton *)spriteButtonWithUpImage:(NSString *)upImage downImage:(NSString *)downImage disabledImage:(NSString *)disabledImage buttonMode:(ButtonMode)buttonMode;
 
+- (CGFloat)getHeight;
+- (CGFloat)getWidth;
+
 @end

@@ -40,9 +40,11 @@ typedef enum gameEndings {
     kMissedHit
 } GameEnder;
 
+static const NSInteger TIME_THRESHOLD = 100;
+
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
-static const NSInteger TAP_BUTTON_HEIGHT = 20;
+static const NSInteger TAP_BUTTON_HEIGHT = 15;
 
 /*
  * Initialize the scene
@@ -64,7 +66,7 @@ static const NSInteger TAP_BUTTON_HEIGHT = 20;
         [self.beginButton setHidden:NO];
         
         // Set the time buffer to 100 milliseconds for now
-        self.timeThreshold = 100;
+        self.timeThreshold = TIME_THRESHOLD;
         
     }
     
@@ -89,7 +91,9 @@ static const NSInteger TAP_BUTTON_HEIGHT = 20;
     self.gameTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     self.gameTimeLabel.text = @"00.00.00";
     self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
-    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - 115, CGRectGetMidY(self.frame) + 50);
+    CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
+    CGFloat strikeWidth = textSize.width;
+    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self addChild:self.gameTimeLabel];
@@ -102,7 +106,8 @@ static const NSInteger TAP_BUTTON_HEIGHT = 20;
 {
     self.tapButton = [SKSpriteButton spriteButtonWithUpImage:@"tapButton" downImage:@"tapButtonPressed" disabledImage:nil buttonMode:kTouchDownInside];
     [self.tapButton setDelegate:self];
-    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170)];
+    NSInteger buttonHeight = [self.tapButton getHeight];
+    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
     [self.tapButton setEnabled:YES];
     [self.tapButton setName:@"tapButton"];
     [self.tapButton setZPosition:4.0f];
@@ -116,7 +121,8 @@ static const NSInteger TAP_BUTTON_HEIGHT = 20;
 {
     self.beginButton = [SKSpriteButton spriteButtonWithUpImage:@"beginButton" downImage:@"beginButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
     [self.beginButton setDelegate:self];
-    [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), 170)];
+    NSInteger buttonHeight = [self.beginButton getHeight];
+    [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
     [self.beginButton setEnabled:YES];
     [self.beginButton setName:@"beginButton"];
     [self.beginButton setZPosition:5.0f];
@@ -187,7 +193,6 @@ static const NSInteger TAP_BUTTON_HEIGHT = 20;
     } else if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
         self.isOpenForHit = YES;
     } else {
-        NSLog(@"Current Milliseconds: %d", (int)currentMilliseconds);
         self.isOpenForHit = NO;
         if (self.secondsElapsed - 1 >= self.lastSecondHit) {
             [self triggerGameEndFrom:kSkippedSecond];

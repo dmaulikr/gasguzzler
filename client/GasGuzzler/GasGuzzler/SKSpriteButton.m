@@ -111,4 +111,15 @@
     self.upSprite.hidden = NO;
 }
 
+- (CGFloat)getHeight
+{
+    return [UIImage imageNamed:self.upImage].size.height;
+}
+
+- (CGFloat)getWidth
+{
+    return [UIImage imageNamed:self.upImage].size.width;
+
+}
+
 @end
