@@ -46,7 +46,7 @@ static const NSInteger TIME_THRESHOLD = 100;
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 static const NSInteger TAP_BUTTON_HEIGHT = 25;
-static const NSInteger BUTTON_Z_LEVEL = 4;
+static const NSInteger BUTTON_Z_LEVEL = 10;
 
 /*
  * Initialize the scene
@@ -64,7 +64,7 @@ static const NSInteger BUTTON_Z_LEVEL = 4;
         [self setupBackButton];
         
         // Hide the tap button @ start
-        [self.tapButton setHidden:NO];
+        [self.tapButton setHidden:YES];
         [self.beginButton setHidden:NO];
         
         // Set the time buffer to 100 milliseconds for now
@@ -140,7 +140,7 @@ static const NSInteger BUTTON_Z_LEVEL = 4;
 {
     self.backButton = [SKSpriteButton spriteButtonWithUpImage:@"backButton" downImage:@"backButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
     [self.backButton setDelegate:self];
-    [self.backButton setPosition:CGPointMake(self.tapButton.frame.size.width + 50, self.frame.size.height - (self.tapButton.frame.size.height/2) - 60) ];
+    [self.backButton setPosition:CGPointMake(self.backButton.frame.size.width/2 + 10, self.frame.size.height - (self.backButton.frame.size.height/2) - 27) ];
     [self.backButton setEnabled:YES];
     [self.backButton setName:@"backButton"];
     [self.backButton setZPosition:BUTTON_Z_LEVEL];
@@ -252,8 +252,9 @@ static const NSInteger BUTTON_Z_LEVEL = 4;
             
             self.lastSecondHit = totalSeconds;
             NSLog(@"Perfect Hit at %d millisecond(s)!", (int)currentMilliseconds);
+            
+            // Do the perfect animations
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
             [self flashBackground:[UIColor perfectGreen]];
             
         } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {

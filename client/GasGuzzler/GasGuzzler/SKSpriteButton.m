@@ -26,7 +26,7 @@
 
 + (SKSpriteButton *)spriteButtonWithUpImage:(NSString *)upImage downImage:(NSString *)downImage disabledImage:(NSString *)disabledImage buttonMode:(ButtonMode)buttonMode
 {
-    SKSpriteButton *newButton = [[SKSpriteButton alloc] init];
+    SKSpriteButton *newButton = [[SKSpriteButton alloc] initWithColor:[UIColor clearColor] size:[UIImage imageNamed:upImage].size];
     newButton.upImage = upImage;
     newButton.downImage = downImage;
     newButton.disabledImage = disabledImage;
