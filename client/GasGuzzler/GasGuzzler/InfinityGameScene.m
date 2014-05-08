@@ -321,6 +321,7 @@ static const NSInteger BUTTON_Z_LEVEL = 4;
     } else if ([button.name isEqualToString:@"backButton"]) {
         [self leaveScene];
     } else if ([button.name isEqualToString:@"beginButton"]) {
+        NSLog(@"New Game Started.");
         // start the game
         [self startGame];
     }
