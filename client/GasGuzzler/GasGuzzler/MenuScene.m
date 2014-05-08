@@ -13,7 +13,7 @@
 
 @interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate>
 
-@property (nonatomic, strong) SKLabelNode *titleLabel;
+@property (nonatomic, strong) SKSpriteButton *logoButton;
 
 // Menu Items
 @property (nonatomic, strong) SKSpriteButton *infinityModeButton;
@@ -25,6 +25,7 @@
 
 @implementation MenuScene
 
+static const NSInteger MENU_ITEMS_HEIGHT = 180;
 
 /*
  * Setup elements of the scene
@@ -54,13 +55,21 @@
  */
 - (void)setupTitle {
     
-    self.titleLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    self.titleLabel.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 130);
-    [self.titleLabel setText:@"Gas Guzzler"];
-    [self.titleLabel setFontColor:[SKColor blackColor]];
-    [self.titleLabel setFontSize:70.0f];
+    self.logoButton = [SKSpriteButton spriteButtonWithUpImage:@"logo" downImage:@"logoPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 80);
     
-    [self addChild:self.titleLabel];
+    [self addChild:self.logoButton];
+    
+    // Add the warning
+    SKLabelNode *warningLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+    [warningLabel setText:@"[this logo is a work in progress]"];
+    [warningLabel setFontColor:[UIColor darkGrayColor]];
+    [warningLabel setFontSize:15.0f];
+    [warningLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
+    
+    [warningLabel setPosition:CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 140)];
+    [self addChild:warningLabel];
+    
 }
 
 /*
@@ -68,7 +77,7 @@
  */
 - (void)setupMenuItems
 {
-    float yCenter = CGRectGetMidY(self.frame) - 40;
+    float yCenter = MENU_ITEMS_HEIGHT;
     float xCenter = CGRectGetMidX(self.frame);
     
     self.infinityModeButton = [SKSpriteButton spriteButtonWithUpImage:@"infinityModeButton" downImage:@"infinityModeButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
