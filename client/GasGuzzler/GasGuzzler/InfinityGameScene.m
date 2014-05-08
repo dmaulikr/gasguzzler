@@ -303,8 +303,8 @@ static const NSInteger BUTTON_Z_LEVEL = 4;
     [bgFlash setAlpha:0.0f];
     [self addChild:bgFlash];
     
-    SKAction *fadeIn = [SKAction fadeAlphaTo:1.0f duration:.1f];
-    SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:.1f];
+    SKAction *fadeIn = [SKAction fadeAlphaTo:1.0f duration:.2f];
+    SKAction *fadeOut = [SKAction fadeAlphaTo:0.0f duration:.2f];
     SKAction *sequence = [SKAction sequence:[NSArray arrayWithObjects:fadeIn, fadeOut, nil]];
     [bgFlash runAction:sequence completion:^{
         [bgFlash removeFromParent];
