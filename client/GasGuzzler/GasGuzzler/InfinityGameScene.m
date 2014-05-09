@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
 @property (nonatomic, strong) NSTimer *gameTimer;
-@property (nonatomic, strong) NSDate *startTime;
+@property (nonatomic) CFAbsoluteTime startTime;
 
 @property (nonatomic) NSInteger secondsElapsed;
 @property (nonatomic) NSInteger lastSecondHit;
@@ -45,6 +45,7 @@ static const NSInteger TIME_THRESHOLD = 100;
 
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
+static const NSInteger SECONDS_IN_MINUTE = 60;
 static const NSInteger TAP_BUTTON_HEIGHT = 25;
 static const NSInteger BUTTON_Z_LEVEL = 10;
 
@@ -153,7 +154,6 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)startGame
 {
-    self.startTime = [NSDate date];
     self.secondsElapsed = 0;
     self.lastSecondHit = 0;
     self.isOpenForHit = NO;
@@ -167,6 +167,9 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self.beginButton setHidden:YES];
     [self swapZs:self.tapButton withSprite:self.beginButton];
     
+    // Set the start time
+    self.startTime = CFAbsoluteTimeGetCurrent();
+
     self.gameTimer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(updateGameTimer:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.gameTimer forMode:NSDefaultRunLoopMode];
     [self.gameTimer fire];
@@ -178,31 +181,26 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
 - (void)updateGameTimer:(NSTimer *)timer {
     
     // Get the current time on the timer
-    NSDate *currentTime = [NSDate date];
-    NSTimeInterval timeInterval = [currentTime timeIntervalSinceDate:self.startTime];
-    NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    CFTimeInterval timeInterval = CFAbsoluteTimeGetCurrent() - self.startTime;
     
-    NSString *timeString = [timerDate getTimerString];
-    NSInteger currentMilliseconds = [[timeString substringFromIndex:[timeString length] - 2] integerValue];
-    currentMilliseconds *= 10;
+    int currentMinutes = timeInterval / 60;
+    int currentSeconds = (int)floor(timeInterval) % 60;
+    int currentMilliseconds = (int)(timeInterval * 1000) % 1000;
+    double tenths = (double)currentMilliseconds/10;
+    int roundedMilliseconds = round(tenths) * 10;
     
-    [self.gameTimeLabel setText:timeString];
+    [self.gameTimeLabel setText:[NSString stringWithFormat:@"%02d.%02d.%02d", currentMinutes, currentSeconds, roundedMilliseconds/10]];
     
     // Set the elapsed seconds
     if (self.secondsElapsed != (int)timeInterval) {
         self.secondsElapsed = (int)timeInterval;
     }
     
-    if ((currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (currentMilliseconds <= self.timeThreshold)) {
-//        if (currentMilliseconds == 0 && self.secondsElapsed != 0) [self registerTapButtonHit];
-        self.isOpenForHit = YES;
-    } else {
-        self.isOpenForHit = NO;
+    if (!((roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (roundedMilliseconds <= self.timeThreshold))) {
         if (self.secondsElapsed - 1 >= self.lastSecondHit) {
             [self triggerGameEndFrom:kSkippedSecond];
         }
     }
-    
 }
 
 /*
@@ -233,36 +231,46 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)registerTapButtonHit
 {
-    NSString *hitTimeString = [self.gameTimeLabel text];
-
-    NSInteger currentMilliseconds = [[hitTimeString substringFromIndex:[hitTimeString length] - 2] integerValue];
-    NSInteger currentSecond = [[[hitTimeString substringFromIndex:3] substringToIndex:2] integerValue];
-    NSInteger currentMinute = [[[hitTimeString substringFromIndex:0] substringToIndex:2] integerValue];
-    NSInteger totalSeconds = (currentMinute * 60) + currentSecond;
-    currentMilliseconds *= 10;
+    CFTimeInterval timeInterval = CFAbsoluteTimeGetCurrent() - self.startTime;
+    
+    int currentMinutes = timeInterval / 60;
+    int currentSeconds = (int)floor(timeInterval) % 60;
+    int totalSeconds = (int)floor(timeInterval);
+    int currentMilliseconds = (int)(timeInterval * 1000) % 1000;
+    double tenths = (double)currentMilliseconds/10;
+    int roundedMilliseconds = round(tenths) * 10;
     
     // Find the hit color for the floaty text
     UIColor *hitColor;
-    hitColor = [UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1];
     
     // From 900--0 or 0-100
-    if (self.isOpenForHit) {
+    if ((roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (roundedMilliseconds <= self.timeThreshold)) {
         
-        if (currentMilliseconds == 0) {
+        if (roundedMilliseconds == 0 || roundedMilliseconds == 1000) {
+            
+            if (roundedMilliseconds == 1000) {
+                totalSeconds += 1;
+                
+                if (currentSeconds == SECONDS_IN_MINUTE - 1) currentSeconds = 0;
+                else currentSeconds += 1;
+            }
             
             self.lastSecondHit = totalSeconds;
-            NSLog(@"Perfect Hit at %d millisecond(s)!", (int)currentMilliseconds);
+            
+            NSLog(@"Perfect Hit at %d millisecond(s)!", (int)roundedMilliseconds);
             
             // Do the perfect animations
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             [self flashBackground:[UIColor perfectGreen]];
             
-        } else if (currentMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
+        } else if (roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) {
             self.lastSecondHit = totalSeconds + 1;
-            NSLog(@"Under Hit at %d millisecond(s)!", (int)currentMilliseconds);
+            NSLog(@"Under Hit at %d millisecond(s)!", (int)roundedMilliseconds);
+            
         } else {
             self.lastSecondHit = totalSeconds;
-            NSLog(@"Over Hit at %d millisecond(s)!", (int)currentMilliseconds);
+            NSLog(@"Over Hit at %d millisecond(s)!", (int)roundedMilliseconds);
+            
         }
         
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
@@ -272,10 +280,12 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         return;
     }
     
+    if (roundedMilliseconds == 1000) roundedMilliseconds = 0;
+
     
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
-    hitTimeLabel.text = hitTimeString;
+    hitTimeLabel.text = [NSString stringWithFormat:@"%02d.%02d.%02d", currentMinutes, currentSeconds, roundedMilliseconds/10];
     hitTimeLabel.fontSize = TIMER_FONT_SIZE;
     CGSize textSize = [@"00.00.00" sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
