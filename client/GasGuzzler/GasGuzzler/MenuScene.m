@@ -57,7 +57,8 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
     
     self.logoButton = [SKSpriteButton spriteButtonWithUpImage:@"logo" downImage:@"logoPressed" disabledImage:nil buttonMode:kTouchUpInside];
     self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 80);
-    
+    [self.logoButton setEnabled:YES];
+    [self.logoButton setDelegate:self];
     [self addChild:self.logoButton];
     
     // Add the warning

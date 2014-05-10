@@ -242,6 +242,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     
     // Find the hit color for the floaty text
     UIColor *hitColor;
+    hitColor = [UIColor gameEndingRed];
     
     // From 900--0 or 0-100
     if ((roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (roundedMilliseconds <= self.timeThreshold)) {
