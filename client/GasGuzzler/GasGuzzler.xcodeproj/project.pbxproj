@@ -10,6 +10,7 @@
 		AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF57DDE219189C2800674CD5 /* NSDate+Utils.m */; };
 		AF57DDE71918A9A400674CD5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF57DDE61918A9A400674CD5 /* GameKit.framework */; };
 		AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */; };
+		AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */; };
 		AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */; };
 		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
 		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
@@ -57,6 +58,8 @@
 		AF57DDE61918A9A400674CD5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		AF7E0994191A047F00E0D808 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
 		AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
+		AF91969C191EC9CF007C71F6 /* ThirtyGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirtyGameScene.h; sourceTree = "<group>"; };
+		AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirtyGameScene.m; sourceTree = "<group>"; };
 		AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -136,6 +139,8 @@
 				AFF7705519183602004E4AE5 /* MenuScene.m */,
 				AFF7B2DE1918C75700B8085C /* InfinityGameScene.h */,
 				AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */,
+				AF91969C191EC9CF007C71F6 /* ThirtyGameScene.h */,
+				AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -421,6 +426,7 @@
 				AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */,
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
+				AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */,
 				AFF7705619183602004E4AE5 /* MenuScene.m in Sources */,
 				AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */,
 				AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */,

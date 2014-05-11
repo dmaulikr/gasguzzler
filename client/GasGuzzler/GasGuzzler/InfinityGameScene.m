@@ -12,6 +12,7 @@
 #import "MenuScene.h"
 #import "UIColor+Extensions.h"
 #import <AudioToolbox/AudioToolbox.h> 
+#import <GameKit/GameKit.h>
 
 @interface InfinityGameScene () <SKSpriteButtonDelegate>
 
@@ -214,7 +215,6 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self.tapButton setHidden:YES];
     [self swapZs:self.tapButton withSprite:self.beginButton];
     
-
     
     if (reason == kMissedHit) {
         
@@ -222,9 +222,39 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         
     }
     
+    // Send the score to GameCenter
+    if ([GKLocalPlayer localPlayer].isAuthenticated) {
+        
+        int64_t calculatedScore = self.lastSecondHit;
+        
+        if (calculatedScore > 0) [self reportScore:calculatedScore forLeaderboardID:@"timeLeaderboard"];
+        else NSLog(@"Score wasn't high enough to send to GameCenter");
+    }
     
     NSLog(@"GAME OVER");
 }
+
+/*
+ * Report the score to GameCenter
+ */
+- (void) reportScore:(int64_t)score forLeaderboardID:(NSString *)identifier
+{
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:identifier];
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    
+    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
+        //Do something interesting here.
+        if(error) {
+            NSLog(@"Error: %@", [error localizedFailureReason]);
+        } else {
+            NSLog(@"Successfully posted score to GameCenter");
+        }
+        
+    }];
+}
+
 
 /*
  * Register Tap Button hit

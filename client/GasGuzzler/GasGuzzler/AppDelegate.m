@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <HockeySDK/HockeySDK.h>
+#import <GameKit/GameKit.h>
 
 @implementation AppDelegate
 
@@ -18,10 +19,39 @@
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     
+    // Authenticate the Game Center player
+    [self authenticateLocalPlayer];
+    
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+/*
+ * Called on every app launch, pretty much checks the current state of the Game Center user
+ * and acts accordingly.
+ */
+- (void)authenticateLocalPlayer
+{
+    // If the player is already authenticated the block returns pretty much immediately so
+    // no need to worry about network lag. If the user hasn't authenticated yet, show the controller
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    [localPlayer setAuthenticateHandler:^(UIViewController *viewController, NSError *error) {
+        
+        if (viewController) {
+            // Gamecenter wants us to display the controller
+            [self.window.rootViewController presentViewController:viewController animated:YES completion:^{}];
+            
+        } else if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            
+            
+        } else {
+            
+            // Disable game center
+            
+        }
+    }];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
