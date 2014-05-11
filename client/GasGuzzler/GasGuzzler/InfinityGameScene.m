@@ -125,7 +125,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)setupBeginButton
 {
-    self.beginButton = [SKSpriteButton spriteButtonWithUpImage:@"beginButton" downImage:@"beginButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    self.beginButton = [SKSpriteButton spriteButtonWithUpImage:@"beginButton" downImage:@"beginButtonPressed" disabledImage:nil buttonMode:kTouchDownInside];
     [self.beginButton setDelegate:self];
     NSInteger buttonHeight = [self.beginButton getHeight];
     [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];

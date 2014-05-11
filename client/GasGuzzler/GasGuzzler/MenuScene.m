@@ -10,8 +10,10 @@
 #import "SKLabelButton.h"
 #import "SKSpriteButton.h"
 #import "InfinityGameScene.h"
+#import "AppDelegate.h"
+#import <GameKit/GameKit.h>
 
-@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate>
+@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate>
 
 @property (nonatomic, strong) SKSpriteButton *logoButton;
 
@@ -121,8 +123,29 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
         InfinityGameScene *igs = [[InfinityGameScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
         [self.view presentScene:igs transition:transition];
+    } else if ([button.name isEqualToString:@"leaderboardsButton"]) {
+        //Show the game center
+        GKGameCenterViewController *gcvc = [[GKGameCenterViewController alloc] init];
+        if (gcvc != nil)
+        {
+            gcvc.gameCenterDelegate = self;
+            gcvc.viewState = GKGameCenterViewControllerStateDefault;
+            
+            gcvc.leaderboardIdentifier = @"timeLeaderboard";
+
+            [self.view.window.rootViewController presentViewController:gcvc animated: YES completion:nil];
+        }
     }
 }
+
+/*
+ * Called from the delegate
+ */
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 /*
  * For the SKLabelButtonDelegate
@@ -137,7 +160,7 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
  */
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"Test");
+
 }
 
 @end
