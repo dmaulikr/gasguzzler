@@ -54,6 +54,7 @@
                 // Send the information to parse
                 [self updateParse];
             } else {
+                NSLog(@"PFUser already logged in.");
                 [[PFUser currentUser] refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
                     [User createOrUpdateUser:(PFUser *)object];
                 }];

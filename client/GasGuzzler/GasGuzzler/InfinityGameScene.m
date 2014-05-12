@@ -27,6 +27,7 @@
 
 @property (nonatomic, strong) SKSpriteButton *tapButton;
 @property (nonatomic, strong) SKSpriteButton *beginButton;
+@property (nonatomic, strong) SKSpriteButton *restartButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
 
@@ -63,11 +64,15 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         [self setupGameTimeLabel];
         [self setupTapButton];
         [self setupBeginButton];
+        [self setupRestartButton];
         [self setupBackButton];
         
         // Hide the tap button @ start
         [self.tapButton setHidden:YES];
         [self.beginButton setHidden:NO];
+        [self.restartButton setHidden:YES];
+        
+        [self swapZs:self.restartButton withSprite:self.beginButton];
         
         // Set the time buffer to 100 milliseconds for now
         self.timeThreshold = TIME_THRESHOLD;
@@ -133,6 +138,21 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self.beginButton setName:@"beginButton"];
     [self.beginButton setZPosition:BUTTON_Z_LEVEL + 1];
     [self addChild:self.beginButton];
+}
+
+/*
+ * Sets up the restart button / (tap button)
+ */
+- (void)setupRestartButton
+{
+    self.restartButton = [SKSpriteButton spriteButtonWithUpImage:@"restartButton" downImage:@"restartButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.restartButton setDelegate:self];
+    NSInteger buttonHeight = [self.restartButton getHeight];
+    [self.restartButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
+    [self.restartButton setEnabled:YES];
+    [self.restartButton setName:@"restartButton"];
+    [self.restartButton setZPosition:BUTTON_Z_LEVEL + 2];
+    [self addChild:self.restartButton];
 }
 
 /*
@@ -209,18 +229,16 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)triggerGameEndFrom:(GameEnder)reason
 {
+    NSLog(@"GAME OVER");
+
     [self.gameTimer invalidate];
     [self.gameTimeLabel setFontColor:[UIColor gameEndingRed]];
-    [self.beginButton setHidden:NO];
+    [self.beginButton setHidden:YES];
     [self.tapButton setHidden:YES];
+    [self.restartButton setHidden:NO];
+
     [self swapZs:self.tapButton withSprite:self.beginButton];
-    
-    
-    if (reason == kMissedHit) {
-        
-    } else if (reason == kSkippedSecond) {
-        
-    }
+    [self swapZs:self.beginButton withSprite:self.restartButton];
     
     // Send the score to GameCenter
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
@@ -230,8 +248,19 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         if (calculatedScore > 0) [self reportScore:calculatedScore forLeaderboardID:@"timeLeaderboard"];
         else NSLog(@"Score wasn't high enough to send to GameCenter");
     }
+
+
+    // Animate score
+    [self animateScoreChange];
     
-    NSLog(@"GAME OVER");
+}
+
+/*
+ * Animate the score changing on the screen
+ */
+- (void)animateScoreChange
+{
+    
 }
 
 /*
@@ -365,6 +394,18 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         NSLog(@"New Game Started.");
         // start the game
         [self startGame];
+    } else if ([button.name isEqualToString:@"restartButton"]) {
+        
+        // Set the timer back to 00.00.00
+        [self.gameTimeLabel setText:@"00.00.00"];
+        [self.gameTimeLabel setFontColor:[UIColor blackColor]];
+        
+        [self.tapButton setHidden:YES];
+        [self.beginButton setHidden:NO];
+        [self.restartButton setHidden:YES];
+        
+        [self swapZs:self.restartButton withSprite:self.beginButton];
+        
     }
 }
 
