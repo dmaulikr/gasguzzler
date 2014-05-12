@@ -22,6 +22,7 @@
 		AF91F4F11920950000462855 /* User+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4F01920950000462855 /* User+Utils.m */; };
 		AF91F4F41920951900462855 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4F31920951900462855 /* DataManager.m */; };
 		AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */; };
+		AFB6E3141921845A008EE801 /* ScoreNode.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB6E3131921845A008EE801 /* ScoreNode.m */; };
 		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
 		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
 		AFC439E319170CD100726778 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E219170CD100726778 /* UIKit.framework */; };
@@ -84,6 +85,8 @@
 		AF91F4F21920951900462855 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		AF91F4F31920951900462855 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		AFB6E3121921845A008EE801 /* ScoreNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreNode.h; sourceTree = "<group>"; };
+		AFB6E3131921845A008EE801 /* ScoreNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreNode.m; sourceTree = "<group>"; };
 		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFC439E019170CD100726778 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -183,6 +186,8 @@
 				AFF77058191837C1004E4AE5 /* SKLabelButton.m */,
 				AFF7706019184B81004E4AE5 /* SKSpriteButton.h */,
 				AFF7706119184B81004E4AE5 /* SKSpriteButton.m */,
+				AFB6E3121921845A008EE801 /* ScoreNode.h */,
+				AFB6E3131921845A008EE801 /* ScoreNode.m */,
 			);
 			name = "Custom Subclasses";
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */,
+				AFB6E3141921845A008EE801 /* ScoreNode.m in Sources */,
 				AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */,
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,

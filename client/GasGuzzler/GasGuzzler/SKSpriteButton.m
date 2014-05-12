@@ -17,6 +17,7 @@
 @property (nonatomic) ButtonMode bm;
 
 @property (nonatomic) BOOL isOnButton;
+@property (nonatomic) BOOL hasDisabledImage;
 
 @end
 
@@ -40,12 +41,20 @@
     newButton.downSprite = downSprite;
     [newButton addChild:downSprite];
     
-    if (!disabledImage || [disabledImage isEqualToString:@""]) disabledImage = @"disabledImage";
+    if (!disabledImage || [disabledImage isEqualToString:@""]) {
+        disabledImage = @"disabledImage";
+        newButton.hasDisabledImage = NO;
+    } else {
+        newButton.hasDisabledImage = YES;
+    }
     SKSpriteNode *disabledSprite = [SKSpriteNode spriteNodeWithImageNamed:disabledImage];
     newButton.disabledSprite = disabledSprite;
     [newButton addChild:disabledSprite];
     
     [newButton setEnabled:YES];
+    newButton.upSprite.hidden = NO;
+    newButton.downSprite.hidden = YES;
+    newButton.disabledSprite.hidden = YES;
     
     return newButton;
 }
@@ -54,14 +63,18 @@
 {
     if (enabled) {
         [self setUserInteractionEnabled:YES];
-        self.upSprite.hidden = NO;
-        self.downSprite.hidden = YES;
-        self.disabledSprite.hidden = YES;
+        if (self.hasDisabledImage) {
+            self.upSprite.hidden = NO;
+            self.downSprite.hidden = YES;
+            self.disabledSprite.hidden = YES;
+        }
     } else {
         [self setUserInteractionEnabled:NO];
-        self.upSprite.hidden = YES;
-        self.downSprite.hidden = YES;
-        self.disabledSprite.hidden = NO;
+        if (self.hasDisabledImage) {
+            self.upSprite.hidden = YES;
+            self.downSprite.hidden = YES;
+            self.disabledSprite.hidden = NO;
+        }
     }
 }
 

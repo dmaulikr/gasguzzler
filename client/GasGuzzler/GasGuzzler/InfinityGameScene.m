@@ -10,8 +10,9 @@
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
+#import "ScoreNode.h"
 #import "UIColor+Extensions.h"
-#import <AudioToolbox/AudioToolbox.h> 
+#import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
 
 @interface InfinityGameScene () <SKSpriteButtonDelegate>
@@ -22,6 +23,7 @@
 
 @property (nonatomic) NSInteger secondsElapsed;
 @property (nonatomic) NSInteger lastSecondHit;
+@property (nonatomic) NSInteger perfectHits;
 @property (nonatomic) BOOL isOpenForHit;
 @property (nonatomic) BOOL hasHitForSecond;
 
@@ -30,6 +32,7 @@
 @property (nonatomic, strong) SKSpriteButton *restartButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
+@property (nonatomic, strong) ScoreNode *scoreNode;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -72,6 +75,9 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         [self.beginButton setHidden:NO];
         [self.restartButton setHidden:YES];
         
+        // Setup the score node
+        [self setupScoreNode];
+        
         [self swapZs:self.restartButton withSprite:self.beginButton];
         
         // Set the time buffer to 100 milliseconds for now
@@ -108,6 +114,18 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
     
     [self addChild:self.gameTimeLabel];
+}
+
+/*
+ * Sets up the score node
+ */
+- (void)setupScoreNode
+{
+    self.scoreNode = [ScoreNode scoreNodeWithScore:0 perfects:0];
+    
+    [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
+    [self addChild:self.scoreNode];
+    
 }
 
 /*
@@ -177,6 +195,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
 {
     self.secondsElapsed = 0;
     self.lastSecondHit = 0;
+    self.perfectHits = 0;
     self.isOpenForHit = NO;
     self.hasHitForSecond = NO;
     
@@ -190,7 +209,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     
     // Set the start time
     self.startTime = CFAbsoluteTimeGetCurrent();
-
+    
     self.gameTimer = [NSTimer timerWithTimeInterval:0.01 target:self selector:@selector(updateGameTimer:) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.gameTimer forMode:NSDefaultRunLoopMode];
     [self.gameTimer fire];
@@ -230,29 +249,52 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
 - (void)triggerGameEndFrom:(GameEnder)reason
 {
     NSLog(@"GAME OVER");
-
+    
     [self.gameTimer invalidate];
     [self.gameTimeLabel setFontColor:[UIColor gameEndingRed]];
     [self.beginButton setHidden:YES];
     [self.tapButton setHidden:YES];
-    [self.restartButton setHidden:NO];
-
+    
     [self swapZs:self.tapButton withSprite:self.beginButton];
     [self swapZs:self.beginButton withSprite:self.restartButton];
     
+    int64_t calculatedScore = self.lastSecondHit;
+
     // Send the score to GameCenter
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
         
-        int64_t calculatedScore = self.lastSecondHit;
         
         if (calculatedScore > 0) [self reportScore:calculatedScore forLeaderboardID:@"timeLeaderboard"];
         else NSLog(@"Score wasn't high enough to send to GameCenter");
     }
-
-
+    
+    [self.restartButton setEnabled:NO];
+    [self.restartButton setHidden:NO];
+    [self performSelector:@selector(enableRestart:) withObject:nil afterDelay:1.0f];
+    
+    NSString *losingTimeString;
+    
+    if (reason == kSkippedSecond) {
+        NSString *oldTime = self.gameTimeLabel.text;
+        oldTime = [[oldTime substringToIndex:6] stringByAppendingString:@"11"];
+        losingTimeString = oldTime;
+    } else {
+        losingTimeString = self.gameTimeLabel.text;
+    }
+    
+    [self.scoreNode setScore:self.lastSecondHit perfects:self.perfectHits losingTime:losingTimeString];
+    
     // Animate score
     [self animateScoreChange];
     
+}
+
+/*
+ * Enables the restart button to be hit after 1 second
+ */
+- (void)enableRestart:(id)sender
+{
+    [self.restartButton setEnabled:YES];
 }
 
 /*
@@ -260,7 +302,37 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)animateScoreChange
 {
+    SKAction *moveInScoreNode = [SKAction moveByX:320 y:0 duration:0.3f];
+    [self.scoreNode runAction:moveInScoreNode completion:^{
+        if (self.scoreNode.frame.origin.x > 320) {
+            [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
+        }
+    }];
     
+    SKAction *moveOutTime = [SKAction moveByX:320 y:0 duration:0.3f];
+    [self.gameTimeLabel runAction:moveOutTime completion:^{
+        if (self.gameTimeLabel.frame.origin.x > 320) {
+            self.gameTimeLabel.text = @"00.00.00";
+            self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
+            CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
+            CGFloat strikeWidth = textSize.width;
+            [self.gameTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320 - (strikeWidth/2), CGRectGetMidY(self.frame))];
+        }
+    }];
+}
+
+/*
+ * Reanimate
+ */
+- (void)animateRestart
+{
+    SKAction *moveInScoreNode = [SKAction moveByX:-320 y:0 duration:0.3f];
+    moveInScoreNode.timingMode = SKActionTimingEaseInEaseOut;
+    [self.scoreNode runAction:moveInScoreNode];
+    
+    SKAction *moveOutTime = [SKAction moveByX:-320 y:0 duration:0.3f];
+    moveOutTime.timingMode = SKActionTimingEaseInEaseOut;
+    [self.gameTimeLabel runAction:moveOutTime];
 }
 
 /*
@@ -315,6 +387,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
             }
             
             self.lastSecondHit = totalSeconds;
+            self.perfectHits++;
             
             NSLog(@"Perfect Hit at %d millisecond(s)!", (int)roundedMilliseconds);
             
@@ -340,7 +413,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     }
     
     if (roundedMilliseconds == 1000) roundedMilliseconds = 0;
-
+    
     
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
@@ -399,6 +472,9 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         // Set the timer back to 00.00.00
         [self.gameTimeLabel setText:@"00.00.00"];
         [self.gameTimeLabel setFontColor:[UIColor blackColor]];
+        
+        // Move the score out of the way
+        [self animateScoreChange];
         
         [self.tapButton setHidden:YES];
         [self.beginButton setHidden:NO];

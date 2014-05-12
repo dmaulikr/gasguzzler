@@ -12,5 +12,6 @@
 
 + (UIColor *)gameEndingRed;
 + (UIColor *)perfectGreen;
++ (UIColor *)scoreTurqoise;
 
 @end

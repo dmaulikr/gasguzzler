@@ -20,4 +20,9 @@
     return [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
 }
 
++ (UIColor *)scoreTurqoise
+{
+    return [UIColor colorWithRed:0.1 green:0.74 blue:0.61 alpha:1];
+}
+
 @end
