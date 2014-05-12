@@ -237,12 +237,11 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
 /*
  * Report the score to GameCenter
  */
-- (void) reportScore:(int64_t)score forLeaderboardID:(NSString *)identifier
+- (void)reportScore:(int64_t)score forLeaderboardID:(NSString *)identifier
 {
     GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:identifier];
     scoreReporter.value = score;
     scoreReporter.context = 0;
-    
     
     [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
         //Do something interesting here.

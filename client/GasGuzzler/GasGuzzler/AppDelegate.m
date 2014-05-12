@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <HockeySDK/HockeySDK.h>
 #import <GameKit/GameKit.h>
+#import <Parse/Parse.h>
 
 @implementation AppDelegate
 
@@ -18,6 +19,10 @@
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"1dbded089e2c4562cb4d166eb57a1b2a"];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    
+    [Parse setApplicationId:@"0i9gbZ0Rac7dFKI4yM0imy2K3RzsWcnrNTrKj6fp"
+                  clientKey:@"UL3oDdKtafceXoN7IELlZQDZTOp6tspOelTB7uwV"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     // Authenticate the Game Center player
     [self authenticateLocalPlayer];

@@ -11,6 +11,12 @@
 		AF57DDE71918A9A400674CD5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF57DDE61918A9A400674CD5 /* GameKit.framework */; };
 		AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */; };
 		AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */; };
+		AF91F4DD19208F5400462855 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4DC19208F5400462855 /* Parse.framework */; };
+		AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4DE19208F7200462855 /* CFNetwork.framework */; };
+		AF91F4E119208F7F00462855 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E019208F7F00462855 /* CoreLocation.framework */; };
+		AF91F4E319208F9800462855 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E219208F9800462855 /* libz.dylib */; };
+		AF91F4E519208FA400462855 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E419208FA400462855 /* MobileCoreServices.framework */; };
+		AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E619208FBD00462855 /* StoreKit.framework */; };
 		AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */; };
 		AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439DE19170CD100726778 /* Foundation.framework */; };
 		AFC439E119170CD100726778 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC439E019170CD100726778 /* CoreGraphics.framework */; };
@@ -60,6 +66,12 @@
 		AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		AF91969C191EC9CF007C71F6 /* ThirtyGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirtyGameScene.h; sourceTree = "<group>"; };
 		AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirtyGameScene.m; sourceTree = "<group>"; };
+		AF91F4DC19208F5400462855 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		AF91F4DE19208F7200462855 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		AF91F4E019208F7F00462855 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AF91F4E219208F9800462855 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AF91F4E419208FA400462855 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AF91F4E619208FBD00462855 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AFC439DB19170CD100726778 /* GasGuzzler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GasGuzzler.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC439DE19170CD100726778 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -105,6 +117,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */,
+				AF91F4E519208FA400462855 /* MobileCoreServices.framework in Frameworks */,
+				AF91F4E319208F9800462855 /* libz.dylib in Frameworks */,
+				AF91F4E119208F7F00462855 /* CoreLocation.framework in Frameworks */,
+				AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */,
 				AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */,
 				AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */,
 				AFF7B2DB1918B98D00B8085C /* Security.framework in Frameworks */,
@@ -115,6 +132,7 @@
 				AFF7B2D31918B97200B8085C /* HockeySDK.framework in Frameworks */,
 				AFC439E519170CD100726778 /* SpriteKit.framework in Frameworks */,
 				AFC439DF19170CD100726778 /* Foundation.framework in Frameworks */,
+				AF91F4DD19208F5400462855 /* Parse.framework in Frameworks */,
 				AF57DDE71918A9A400674CD5 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +219,12 @@
 		AFC439DD19170CD100726778 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF91F4E619208FBD00462855 /* StoreKit.framework */,
+				AF91F4E419208FA400462855 /* MobileCoreServices.framework */,
+				AF91F4E219208F9800462855 /* libz.dylib */,
+				AF91F4E019208F7F00462855 /* CoreLocation.framework */,
+				AF91F4DE19208F7200462855 /* CFNetwork.framework */,
+				AF91F4DC19208F5400462855 /* Parse.framework */,
 				AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */,
 				AFF7B2DC1918B99200B8085C /* SystemConfiguration.framework */,
 				AFF7B2DA1918B98D00B8085C /* Security.framework */,
@@ -561,6 +585,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
@@ -582,6 +607,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
