@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "User+Utils.h"
 #import <HockeySDK/HockeySDK.h>
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
@@ -48,11 +49,77 @@
             
         } else if ([GKLocalPlayer localPlayer].isAuthenticated) {
             
+            PFUser *currentUser = [PFUser currentUser];
+            if (!currentUser) {
+                // Send the information to parse
+                [self updateParse];
+            } else {
+                [[PFUser currentUser] refreshInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                    [User createOrUpdateUser:(PFUser *)object];
+                }];
+            }
+            
             
         } else {
             
             // Disable game center
             
+        }
+    }];
+}
+
+/*
+ * Send GameCenter info to parse
+ */
+- (void)updateParse
+{
+    // First try to login the user
+    NSString *username = [GKLocalPlayer localPlayer].playerID;
+    [PFUser logInWithUsernameInBackground:username password:@"Taps!" block:^(PFUser *user, NSError *error) {
+        if (user) {
+            // Do stuff after successful login.
+            NSLog(@"PFUser has logged in!");
+            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+            [currentInstallation setObject:[PFUser currentUser] forKey:@"owner"];
+            [currentInstallation saveInBackground];
+            
+            // Update their alias if it has changed
+            if (![[user valueForKey:@"alias"]  isEqualToString:[GKLocalPlayer localPlayer].alias]) {
+                [[PFUser currentUser] setValue:[GKLocalPlayer localPlayer].alias forKey:@"gameCenterAlias"];
+                [[PFUser currentUser] saveInBackground];
+            }
+            
+            [User createOrUpdateUser:[PFUser currentUser]];
+            
+            // Post a positive notification name
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ParseInfoLoaded" object:nil];
+            
+        } else {
+            // The login failed. Check error to see why.
+            NSLog(@"User probably doesn't have an account yet");
+            PFUser *newUser = [PFUser user];
+            newUser.username = [GKLocalPlayer localPlayer].playerID;
+            newUser.password = @"Taps!";
+            
+            [newUser setValue:[GKLocalPlayer localPlayer].alias forKey:@"gameCenterAlias"];
+
+            [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    // Hooray! Let them use the app now.
+                    NSLog(@"PFUser has logged in for the first time!");
+                    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                    [currentInstallation setObject:[PFUser currentUser] forKey:@"owner"];
+                    [currentInstallation saveInBackground];
+                    
+                    [User createOrUpdateUser:[PFUser currentUser]];
+                    
+                    // Post a positive notification name
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ParseInfoLoaded" object:nil];
+                } else {
+                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                    NSLog(@"Error creating Parse account: %@", errorString);
+                }
+            }];
         }
     }];
 }
