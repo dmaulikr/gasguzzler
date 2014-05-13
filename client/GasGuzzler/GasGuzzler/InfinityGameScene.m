@@ -415,7 +415,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self addChild:hitTimeLabel];
     
     SKAction *fadeOut = [SKAction fadeOutWithDuration:1.3f];
-    SKAction *moveUp = [SKAction moveByX:0.0f y:150.0f duration:1.3f];
+    SKAction *moveUp = [SKEase MoveToWithNode:hitTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:1.3f ToVector:CGVectorMake(hitTimeLabel.frame.origin.x, hitTimeLabel.frame.origin.y + 100)];
     SKAction *tween = [SKAction group:[NSArray arrayWithObjects:fadeOut, moveUp, nil]];
     [hitTimeLabel runAction:tween completion:^{
         [hitTimeLabel removeFromParent];
