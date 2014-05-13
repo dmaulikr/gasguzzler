@@ -11,6 +11,7 @@
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
 #import "ScoreNode.h"
+#import "SKEase.h"
 #import "UIColor+Extensions.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
@@ -276,7 +277,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     
     if (reason == kSkippedSecond) {
         NSString *oldTime = self.gameTimeLabel.text;
-        oldTime = [[oldTime substringToIndex:6] stringByAppendingString:@"11"];
+        oldTime = [[oldTime substringToIndex:6] stringByAppendingString:[NSString stringWithFormat:@"%02d", ((int)self.timeThreshold/10) + 1]];
         losingTimeString = oldTime;
     } else {
         losingTimeString = self.gameTimeLabel.text;
@@ -302,15 +303,15 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)animateScoreChange
 {
-    SKAction *moveInScoreNode = [SKAction moveByX:320 y:0 duration:0.3f];
+    SKAction *moveInScoreNode = [SKEase MoveToWithNode:self.scoreNode EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.scoreNode.frame.origin.x + 320, self.scoreNode.frame.origin.y)];
     [self.scoreNode runAction:moveInScoreNode completion:^{
         if (self.scoreNode.frame.origin.x > 320) {
             [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
         }
     }];
     
-    SKAction *moveOutTime = [SKAction moveByX:320 y:0 duration:0.3f];
-    [self.gameTimeLabel runAction:moveOutTime completion:^{
+    SKAction *moveOutTimeNode = [SKEase MoveToWithNode:self.gameTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.gameTimeLabel.frame.origin.x + 320, self.gameTimeLabel.frame.origin.y)];
+    [self.gameTimeLabel runAction:moveOutTimeNode completion:^{
         if (self.gameTimeLabel.frame.origin.x > 320) {
             self.gameTimeLabel.text = @"00.00.00";
             self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
@@ -319,20 +320,6 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
             [self.gameTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320 - (strikeWidth/2), CGRectGetMidY(self.frame))];
         }
     }];
-}
-
-/*
- * Reanimate
- */
-- (void)animateRestart
-{
-    SKAction *moveInScoreNode = [SKAction moveByX:-320 y:0 duration:0.3f];
-    moveInScoreNode.timingMode = SKActionTimingEaseInEaseOut;
-    [self.scoreNode runAction:moveInScoreNode];
-    
-    SKAction *moveOutTime = [SKAction moveByX:-320 y:0 duration:0.3f];
-    moveOutTime.timingMode = SKActionTimingEaseInEaseOut;
-    [self.gameTimeLabel runAction:moveOutTime];
 }
 
 /*
