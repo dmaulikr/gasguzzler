@@ -265,7 +265,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     }
     
     if (!((roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (roundedMilliseconds <= self.timeThreshold))) {
-        if (self.secondsElapsed == THIRTY_SECONDS) {
+        if (self.secondsElapsed >= THIRTY_SECONDS) {
             [self triggerGameEndFrom:kSkippedSecond];
         }
     }
