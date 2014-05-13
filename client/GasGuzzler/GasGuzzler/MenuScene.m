@@ -11,6 +11,7 @@
 #import "SKSpriteButton.h"
 #import "InfinityGameScene.h"
 #import "AppDelegate.h"
+#import "ThirtyGameScene.h"
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
 
@@ -124,6 +125,10 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
 
             [self.view.window.rootViewController presentViewController:gcvc animated: YES completion:nil];
         }
+    } else if ([button.name isEqualToString:@"30secondModeButton"]) {
+        ThirtyGameScene *tgs = [[ThirtyGameScene alloc] initWithSize:self.frame.size];
+        SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
+        [self.view presentScene:tgs transition:transition];
     }
 }
 
