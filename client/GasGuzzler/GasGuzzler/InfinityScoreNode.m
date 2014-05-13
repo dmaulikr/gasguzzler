@@ -1,15 +1,15 @@
 //
-//  ScoreNode.m
+//  InfinityScoreNode.m
 //  GasGuzzler
 //
 //  Created by Raymond kennedy on 5/12/14.
 //  Copyright (c) 2014 Raymond kennedy. All rights reserved.
 //
 
-#import "ScoreNode.h"
+#import "InfinityScoreNode.h"
 #import "UIColor+Extensions.h"
 
-@interface ScoreNode ()
+@interface InfinityScoreNode ()
 
 @property (nonatomic, strong) SKLabelNode *scoreLabel;
 @property (nonatomic, strong) SKLabelNode *perfects;
@@ -17,16 +17,16 @@
 
 @end
 
-@implementation ScoreNode
+@implementation InfinityScoreNode
 
 static const NSInteger FONT_SIZE = 75;
 
 /*
  * Returns a new score node
  */
-+ (ScoreNode *)scoreNodeWithScore:(NSInteger)score perfects:(NSInteger)perfectHits
++ (InfinityScoreNode *)scoreNodeWithScore:(NSInteger)score perfects:(NSInteger)perfectHits
 {
-    ScoreNode *sn = [[ScoreNode alloc] init];
+    InfinityScoreNode *sn = [[InfinityScoreNode alloc] init];
     
     // Setup the score label and nickname label
     sn.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];

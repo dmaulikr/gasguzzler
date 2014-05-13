@@ -1,5 +1,5 @@
 //
-//  ScoreNode.h
+//  InfinityScoreNode.h
 //  GasGuzzler
 //
 //  Created by Raymond kennedy on 5/12/14.
@@ -8,9 +8,9 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface ScoreNode : SKNode
+@interface InfinityScoreNode : SKNode
 
-+ (ScoreNode *)scoreNodeWithScore:(NSInteger)score perfects:(NSInteger)perfectHits;
++ (InfinityScoreNode *)scoreNodeWithScore:(NSInteger)score perfects:(NSInteger)perfectHits;
 - (void)setScore:(NSInteger)score perfects:(NSInteger)perfects losingTime:(NSString *)losingTime;
 
 @end

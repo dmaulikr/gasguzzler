@@ -10,7 +10,7 @@
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
-#import "ScoreNode.h"
+#import "InfinityScoreNode.h"
 #import "SKEase.h"
 #import "UIColor+Extensions.h"
 #import <AudioToolbox/AudioToolbox.h>
@@ -33,7 +33,7 @@
 @property (nonatomic, strong) SKSpriteButton *restartButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
-@property (nonatomic, strong) ScoreNode *scoreNode;
+@property (nonatomic, strong) InfinityScoreNode *scoreNode;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -122,7 +122,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
  */
 - (void)setupScoreNode
 {
-    self.scoreNode = [ScoreNode scoreNodeWithScore:0 perfects:0];
+    self.scoreNode = [InfinityScoreNode scoreNodeWithScore:0 perfects:0];
     
     [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
     [self addChild:self.scoreNode];

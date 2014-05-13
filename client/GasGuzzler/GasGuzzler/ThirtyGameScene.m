@@ -10,7 +10,7 @@
 #import "SKSpriteButton.h"
 #import "NSDate+Utils.h"
 #import "MenuScene.h"
-#import "ScoreNode.h"
+#import "ThirtyScoreNode.h"
 #import "SKEase.h"
 #import "UIColor+Extensions.h"
 #import <AudioToolbox/AudioToolbox.h>
@@ -33,7 +33,8 @@
 @property (nonatomic, strong) SKSpriteButton *restartButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
-@property (nonatomic, strong) ScoreNode *scoreNode;
+@property (nonatomic, strong) SKNode *gameNode;
+@property (nonatomic, strong) ThirtyScoreNode *scoreNode;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -48,13 +49,15 @@ typedef enum gameEndings {
 } GameEnder;
 
 static const NSInteger TIME_THRESHOLD = 100;
+static const NSInteger FONT_SIZE = 75;
 
-static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 static const NSInteger SECONDS_IN_MINUTE = 60;
+static const NSInteger THIRTY_SECONDS = 30;
+
 static const NSInteger TAP_BUTTON_HEIGHT = 25;
 static const NSInteger BUTTON_Z_LEVEL = 10;
-static const NSInteger THIRTY_SECONDS = 30;
+
 static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
 
 /*
@@ -65,6 +68,10 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
         
         // Set the background color to white
         self.backgroundColor = [UIColor whiteColor];
+        
+        // Setup the game node
+        self.gameNode = [[SKNode alloc] init];
+        [self addChild:self.gameNode];
         
         // Setup the timer label and count down label and the button
         [self setupGameTimeLabel];
@@ -109,15 +116,15 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
 {
     self.gameTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     self.gameTimeLabel.text = @"00.00.00";
-    self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
-    CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
+    self.gameTimeLabel.fontSize = FONT_SIZE;
+    CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
     self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
     
-    [self addChild:self.gameTimeLabel];
+    [self.gameNode addChild:self.gameTimeLabel];
 }
 
 /*
@@ -128,13 +135,12 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
     [self.scoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
     self.scoreLabel.text = @"0";
-    self.scoreLabel.fontSize = TIMER_FONT_SIZE;
-    NSLog(@"MidX: %f", CGRectGetMidX(self.frame));
+    self.scoreLabel.fontSize = FONT_SIZE;
     self.scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 100);
-    [self.scoreLabel setFontColor:[UIColor blackColor]];
+    [self.scoreLabel setFontColor:[UIColor scoreTurqoise]];
     [self.scoreLabel setZPosition:BUTTON_Z_LEVEL - 1];
     
-    [self addChild:self.scoreLabel];
+    [self.gameNode addChild:self.scoreLabel];
 }
 
 /*
@@ -142,7 +148,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
  */
 - (void)setupScoreNode
 {
-    self.scoreNode = [ScoreNode scoreNodeWithScore:0 perfects:0];
+    self.scoreNode = [ThirtyScoreNode scoreNodeWithScore:0 perfects:0];
     
     [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
     [self addChild:self.scoreNode];
@@ -285,7 +291,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     // Send the score to GameCenter
     if ([GKLocalPlayer localPlayer].isAuthenticated) {
         
-        if (calculatedScore > 0) [self reportScore:calculatedScore forLeaderboardID:@"timeLeaderboard"];
+        if (calculatedScore > 0) [self reportScore:calculatedScore forLeaderboardID:@"thirtySecondLeaderboard"];
         else NSLog(@"Score wasn't high enough to send to GameCenter");
     }
     
@@ -303,7 +309,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
         losingTimeString = self.gameTimeLabel.text;
     }
     
-    [self.scoreNode setScore:self.score perfects:self.perfectHits losingTime:losingTimeString];
+    [self.scoreNode setScore:self.score perfects:self.perfectHits missedHits:self.missHits];
     
     // Animate score
     [self animateScoreChange];
@@ -323,21 +329,19 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
  */
 - (void)animateScoreChange
 {
-    SKAction *moveInScoreNode = [SKEase MoveToWithNode:self.scoreNode EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.scoreNode.frame.origin.x + 320, self.scoreNode.frame.origin.y)];
-    [self.scoreNode runAction:moveInScoreNode completion:^{
-        if (self.scoreNode.frame.origin.x > 320) {
-            [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
+    SKAction *moveScoreNode = [SKEase MoveToWithNode:self.scoreNode EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.scoreNode.frame.origin.x + self.frame.size.width, self.scoreNode.frame.origin.y)];
+    [self.scoreNode runAction:moveScoreNode completion:^{
+        if (self.scoreNode.frame.origin.x > self.frame.size.width) {
+            [self.scoreNode setPosition:CGPointMake(-CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
         }
     }];
-    
-    SKAction *moveOutTimeNode = [SKEase MoveToWithNode:self.gameTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.gameTimeLabel.frame.origin.x + 320, self.gameTimeLabel.frame.origin.y)];
-    [self.gameTimeLabel runAction:moveOutTimeNode completion:^{
-        if (self.gameTimeLabel.frame.origin.x > 320) {
-            self.gameTimeLabel.text = @"00.00.00";
-            self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
-            CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
-            CGFloat strikeWidth = textSize.width;
-            [self.gameTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320 - (strikeWidth/2), CGRectGetMidY(self.frame))];
+    NSLog(@"GameNode.frame.origin.x: %f", self.gameNode.frame.origin.x);
+
+    SKAction *moveGameNode = [SKEase MoveToWithNode:self.gameNode EaseFunction:CurveTypeCubic Mode:EaseOut Time:0.5f ToVector:CGVectorMake(self.gameNode.frame.origin.x + self.frame.size.width, self.gameNode.frame.origin.y)];
+    [self.gameNode runAction:moveGameNode completion:^{
+        NSLog(@"GameNode.frame.origin.x: %f", self.gameNode.frame.origin.x);
+        if (self.gameNode.frame.origin.x >= self.frame.size.width) {
+            [self.gameNode setPosition:CGPointMake(-self.frame.size.width, self.gameNode.frame.origin.y)];
         }
     }];
 }
@@ -347,19 +351,19 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
  */
 - (void)reportScore:(int64_t)score forLeaderboardID:(NSString *)identifier
 {
-//    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:identifier];
-//    scoreReporter.value = score;
-//    scoreReporter.context = 0;
-//    
-//    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
-//        //Do something interesting here.
-//        if(error) {
-//            NSLog(@"Error: %@", [error localizedFailureReason]);
-//        } else {
-//            NSLog(@"Successfully posted score to GameCenter");
-//        }
-//        
-//    }];
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:identifier];
+    scoreReporter.value = score;
+    scoreReporter.context = 0;
+    
+    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
+        //Do something interesting here.
+        if(error) {
+            NSLog(@"Error: %@", [error localizedFailureReason]);
+        } else {
+            NSLog(@"Successfully posted score to GameCenter");
+        }
+        
+    }];
 }
 
 
@@ -370,9 +374,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
 {
     CFTimeInterval timeInterval = CFAbsoluteTimeGetCurrent() - self.startTime;
     
-    int currentMinutes = timeInterval / 60;
     int currentSeconds = (int)floor(timeInterval) % 60;
-    int totalSeconds = (int)floor(timeInterval);
     int currentMilliseconds = (int)(timeInterval * 1000) % 1000;
     double tenths = (double)currentMilliseconds/10;
     int roundedMilliseconds = round(tenths) * 10;
@@ -387,12 +389,9 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     // From 900--0 or 0-100
     if ((roundedMilliseconds >= MILLISECONDS_IN_SECOND - self.timeThreshold) || (roundedMilliseconds <= self.timeThreshold)) {
         
-        
         if (roundedMilliseconds == 0 || roundedMilliseconds == 1000) {
             
             if (roundedMilliseconds == 1000) {
-                totalSeconds += 1;
-                
                 if (currentSeconds == SECONDS_IN_MINUTE - 1) currentSeconds = 0;
                 else currentSeconds += 1;
             }
@@ -423,14 +422,15 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
         hitColor = [UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1];
 
     } else {
+        
+        self.missHits++;
+        
         if (roundedMilliseconds >= MILLISECONDS_IN_SECOND/2) {
             distanceToPerfect = MILLISECONDS_IN_SECOND - roundedMilliseconds;
         } else {
             distanceToPerfect = roundedMilliseconds;
         }
     }
-    
-    NSLog(@"Distance to perfect: %d", (int)distanceToPerfect);
     
     if (distanceToPerfect > self.timeThreshold) {
         // Yield a negative score
@@ -443,6 +443,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     }
     
     NSLog(@"Score: %d", (int)scoreForHit);
+    
     if (roundedMilliseconds == 1000) roundedMilliseconds = 0;
     
     
@@ -456,21 +457,22 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
         hitTimeLabel.text = [NSString stringWithFormat:@"+%d", (int)scoreForHit];
     }
     
-    NSLog(@"MidX: %f", CGRectGetMidX(self.frame));
-
-    
-    hitTimeLabel.fontSize = TIMER_FONT_SIZE;
-    [hitTimeLabel setPosition:CGPointMake(self.scoreLabel.frame.origin.x, self.gameTimeLabel.frame.origin.y)];
+    hitTimeLabel.fontSize = FONT_SIZE;
+    [hitTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
     [hitTimeLabel setFontColor:hitColor];
     [hitTimeLabel setZPosition:BUTTON_Z_LEVEL - 2];
     [self addChild:hitTimeLabel];
     
     SKAction *fadeOut = [SKAction fadeOutWithDuration:1.3f];
-    SKAction *moveUp = [SKEase MoveToWithNode:hitTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:1.3f ToVector:CGVectorMake(self.scoreLabel.frame.origin.x, self.scoreLabel.frame.origin.y)];
+    SKAction *moveUp = [SKEase MoveToWithNode:hitTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:1.3f ToVector:CGVectorMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 100)];
     SKAction *tween = [SKAction group:[NSArray arrayWithObjects:fadeOut, moveUp, nil]];
     [hitTimeLabel runAction:tween completion:^{
         [hitTimeLabel removeFromParent];
     }];
+    
+    //update the score label
+    self.score += scoreForHit;
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%d", (int)self.score]];
 }
 
 /*
@@ -509,6 +511,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
         
         // Set the timer back to 00.00.00
         [self.gameTimeLabel setText:@"00.00.00"];
+        [self.scoreLabel setText:@"0"];
         [self.gameTimeLabel setFontColor:[UIColor blackColor]];
         
         // Move the score out of the way
