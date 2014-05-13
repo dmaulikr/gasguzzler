@@ -119,7 +119,7 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
         if (gcvc != nil)
         {
             gcvc.gameCenterDelegate = self;
-            gcvc.viewState = GKGameCenterViewControllerStateDefault;
+            gcvc.viewState = GKGameCenterViewControllerStateLeaderboards;
             
             gcvc.leaderboardIdentifier = @"timeLeaderboard";
 
