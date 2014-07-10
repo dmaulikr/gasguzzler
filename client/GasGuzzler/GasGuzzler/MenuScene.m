@@ -121,8 +121,6 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
             gcvc.gameCenterDelegate = self;
             gcvc.viewState = GKGameCenterViewControllerStateLeaderboards;
             
-            gcvc.leaderboardIdentifier = @"timeLeaderboard";
-
             [self.view.window.rootViewController presentViewController:gcvc animated: YES completion:nil];
         }
     } else if ([button.name isEqualToString:@"30secondModeButton"]) {
