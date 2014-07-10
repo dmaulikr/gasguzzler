@@ -297,7 +297,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     
     [self.restartButton setEnabled:NO];
     [self.restartButton setHidden:NO];
-    [self performSelector:@selector(enableRestart:) withObject:nil afterDelay:1.0f];
+    [self performSelector:@selector(enableRestart:) withObject:nil afterDelay:0.5f];
     
     NSString *losingTimeString;
     
