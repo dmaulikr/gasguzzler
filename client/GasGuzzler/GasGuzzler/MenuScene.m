@@ -15,7 +15,7 @@
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
 
-@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate>
+@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) SKSpriteButton *logoButton;
 
@@ -114,19 +114,39 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
         [self.view presentScene:igs transition:transition];
     } else if ([button.name isEqualToString:@"leaderboardsButton"]) {
-        //Show the game center
-        GKGameCenterViewController *gcvc = [[GKGameCenterViewController alloc] init];
-        if (gcvc != nil)
-        {
-            gcvc.gameCenterDelegate = self;
-            gcvc.viewState = GKGameCenterViewControllerStateLeaderboards;
+        
+        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+            //Show the game center
+            GKGameCenterViewController *gcvc = [[GKGameCenterViewController alloc] init];
+            if (gcvc != nil)
+            {
+                gcvc.gameCenterDelegate = self;
+                gcvc.viewState = GKGameCenterViewControllerStateLeaderboards;
+                
+                [self.view.window.rootViewController presentViewController:gcvc animated: YES completion:nil];
+            }
+        } else {
+            // Show the game center authentication screen
+            UIAlertView *alertView = [[UIAlertView alloc]
+                                      initWithTitle:@"Game Center"
+                                      message:@"Log in through Game Center"
+                                      delegate:self
+                                      cancelButtonTitle:@"No"
+                                      otherButtonTitles:@"Rad!", nil];
+            [alertView show];
             
-            [self.view.window.rootViewController presentViewController:gcvc animated: YES completion:nil];
         }
+        
     } else if ([button.name isEqualToString:@"30secondModeButton"]) {
         ThirtyGameScene *tgs = [[ThirtyGameScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
         [self.view presentScene:tgs transition:transition];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"gamecenter:"]];
     }
 }
 
