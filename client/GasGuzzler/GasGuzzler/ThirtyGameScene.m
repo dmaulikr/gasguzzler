@@ -55,7 +55,7 @@ static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 static const NSInteger SECONDS_IN_MINUTE = 60;
 static const NSInteger THIRTY_SECONDS = 30;
 
-static const NSInteger TAP_BUTTON_HEIGHT = 25;
+static const NSInteger TAP_BUTTON_HEIGHT = 68;
 static const NSInteger BUTTON_Z_LEVEL = 10;
 
 static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
@@ -119,7 +119,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     self.gameTimeLabel.fontSize = FONT_SIZE;
     CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
-    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
+    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame) + 30);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
@@ -136,7 +136,7 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     [self.scoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeCenter];
     self.scoreLabel.text = @"0";
     self.scoreLabel.fontSize = FONT_SIZE;
-    self.scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 100);
+    self.scoreLabel.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 130);
     [self.scoreLabel setFontColor:[UIColor scoreTurqoise]];
     [self.scoreLabel setZPosition:BUTTON_Z_LEVEL - 1];
     
@@ -458,13 +458,13 @@ static const NSInteger SCORE_MULTIPLYING_FACTOR = 10;
     }
     
     hitTimeLabel.fontSize = FONT_SIZE;
-    [hitTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame))];
+    [hitTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 30)];
     [hitTimeLabel setFontColor:hitColor];
     [hitTimeLabel setZPosition:BUTTON_Z_LEVEL - 2];
     [self addChild:hitTimeLabel];
     
     SKAction *fadeOut = [SKAction fadeOutWithDuration:1.3f];
-    SKAction *moveUp = [SKEase MoveToWithNode:hitTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:1.3f ToVector:CGVectorMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 100)];
+    SKAction *moveUp = [SKEase MoveToWithNode:hitTimeLabel EaseFunction:CurveTypeCubic Mode:EaseOut Time:1.3f ToVector:CGVectorMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame) + 130)];
     SKAction *tween = [SKAction group:[NSArray arrayWithObjects:fadeOut, moveUp, nil]];
     [hitTimeLabel runAction:tween completion:^{
         [hitTimeLabel removeFromParent];

@@ -12,6 +12,7 @@
 #import "InfinityGameScene.h"
 #import "AppDelegate.h"
 #import "ThirtyGameScene.h"
+
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
 
@@ -29,7 +30,7 @@
 
 @implementation MenuScene
 
-static const NSInteger MENU_ITEMS_HEIGHT = 180;
+static const NSInteger MENU_ITEMS_HEIGHT = 230;
 
 /*
  * Setup elements of the scene
@@ -59,7 +60,7 @@ static const NSInteger MENU_ITEMS_HEIGHT = 180;
 - (void)setupTitle {
     
     self.logoButton = [SKSpriteButton spriteButtonWithUpImage:@"logo" downImage:@"logoPressed" disabledImage:nil buttonMode:kTouchUpInside];
-    self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 130);
+    self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 100);
     [self.logoButton setEnabled:YES];
     [self.logoButton setDelegate:self];
     [self addChild:self.logoButton];

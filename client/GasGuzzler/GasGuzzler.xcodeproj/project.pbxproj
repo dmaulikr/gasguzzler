@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF57DDE219189C2800674CD5 /* NSDate+Utils.m */; };
 		AF57DDE71918A9A400674CD5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF57DDE61918A9A400674CD5 /* GameKit.framework */; };
+		AF6743751976018B00723B27 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743741976018B00723B27 /* iAd.framework */; };
+		AF6743AF1976074400723B27 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743AE1976074400723B27 /* AdSupport.framework */; };
+		AF6743B11976074F00723B27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743B01976074F00723B27 /* AVFoundation.framework */; };
+		AF6743B31976075A00723B27 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743B21976075A00723B27 /* CoreTelephony.framework */; };
+		AF6743B51976076200723B27 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743B41976076200723B27 /* MessageUI.framework */; };
 		AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */; };
 		AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */; };
 		AF91F4DD19208F5400462855 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4DC19208F5400462855 /* Parse.framework */; };
@@ -70,6 +75,11 @@
 		AF57DDE119189C2800674CD5 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		AF57DDE219189C2800674CD5 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		AF57DDE61918A9A400674CD5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		AF6743741976018B00723B27 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		AF6743AE1976074400723B27 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		AF6743B01976074F00723B27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		AF6743B21976075A00723B27 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AF6743B41976076200723B27 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		AF7E0994191A047F00E0D808 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
 		AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
 		AF91969C191EC9CF007C71F6 /* ThirtyGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirtyGameScene.h; sourceTree = "<group>"; };
@@ -142,13 +152,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */,
+				AF6743B51976076200723B27 /* MessageUI.framework in Frameworks */,
+				AF6743B31976075A00723B27 /* CoreTelephony.framework in Frameworks */,
+				AF6743B11976074F00723B27 /* AVFoundation.framework in Frameworks */,
+				AF6743AF1976074400723B27 /* AdSupport.framework in Frameworks */,
+				AF6743751976018B00723B27 /* iAd.framework in Frameworks */,
 				AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */,
 				AF91F4E519208FA400462855 /* MobileCoreServices.framework in Frameworks */,
 				AF91F4E319208F9800462855 /* libz.dylib in Frameworks */,
 				AF91F4E119208F7F00462855 /* CoreLocation.framework in Frameworks */,
 				AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */,
 				AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */,
-				AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */,
 				AFF7B2DB1918B98D00B8085C /* Security.framework in Frameworks */,
 				AFF7B2D91918B98800B8085C /* QuartzCore.framework in Frameworks */,
 				AFF7B2D71918B98300B8085C /* CoreText.framework in Frameworks */,
@@ -275,6 +290,11 @@
 		AFC439DD19170CD100726778 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF6743B41976076200723B27 /* MessageUI.framework */,
+				AF6743B21976075A00723B27 /* CoreTelephony.framework */,
+				AF6743B01976074F00723B27 /* AVFoundation.framework */,
+				AF6743AE1976074400723B27 /* AdSupport.framework */,
+				AF6743741976018B00723B27 /* iAd.framework */,
 				AF91F4E619208FBD00462855 /* StoreKit.framework */,
 				AF91F4E419208FA400462855 /* MobileCoreServices.framework */,
 				AF91F4E219208F9800462855 /* libz.dylib */,
@@ -656,6 +676,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
 				INFOPLIST_FILE = "GasGuzzler/GasGuzzler-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GasGuzzler",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -678,6 +703,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
 				INFOPLIST_FILE = "GasGuzzler/GasGuzzler-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GasGuzzler",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -701,6 +731,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "GasGuzzlerTests/GasGuzzlerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GasGuzzler",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -719,6 +753,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GasGuzzler/GasGuzzler-Prefix.pch";
 				INFOPLIST_FILE = "GasGuzzlerTests/GasGuzzlerTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GasGuzzler",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

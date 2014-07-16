@@ -52,7 +52,7 @@ static const NSInteger TIME_THRESHOLD = 100;
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 static const NSInteger SECONDS_IN_MINUTE = 60;
-static const NSInteger TAP_BUTTON_HEIGHT = 25;
+static const NSInteger TAP_BUTTON_HEIGHT = 68;
 static const NSInteger BUTTON_Z_LEVEL = 10;
 
 /*
@@ -109,7 +109,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
     CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
-    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
+    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame) + 30);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
@@ -408,7 +408,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     hitTimeLabel.fontSize = TIMER_FONT_SIZE;
     CGSize textSize = [@"00.00.00" sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
-    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame));
+    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame) + 30);
     [hitTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [hitTimeLabel setFontColor:hitColor];
     [hitTimeLabel setZPosition:BUTTON_Z_LEVEL - 2];
