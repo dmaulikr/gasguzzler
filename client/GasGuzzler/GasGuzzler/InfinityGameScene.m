@@ -52,8 +52,12 @@ static const NSInteger TIME_THRESHOLD = 100;
 static const NSInteger TIMER_FONT_SIZE = 75;
 static const NSInteger MILLISECONDS_IN_SECOND = 1000;
 static const NSInteger SECONDS_IN_MINUTE = 60;
-static const NSInteger TAP_BUTTON_HEIGHT = 68;
+static const NSInteger TAP_BUTTON_HEIGHT_4_INCH = 68;
+static const NSInteger TAP_BUTTON_HEIGHT_3_5_INCH = 20;
+
 static const NSInteger BUTTON_Z_LEVEL = 10;
+
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
 /*
  * Initialize the scene
@@ -109,7 +113,13 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     self.gameTimeLabel.fontSize = TIMER_FONT_SIZE;
     CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
-    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame) + 30);
+    float yCoord = 0;
+    if (isiPhone5) {
+        yCoord = CGRectGetMidY(self.frame) + 30;
+    } else {
+        yCoord = CGRectGetMidY(self.frame);
+    }
+    self.gameTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, yCoord);
     [self.gameTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [self.gameTimeLabel setFontColor:[UIColor blackColor]];
     [self.gameTimeLabel setZPosition:BUTTON_Z_LEVEL - 1];
@@ -137,7 +147,14 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     self.tapButton = [SKSpriteButton spriteButtonWithUpImage:@"tapButton" downImage:@"tapButtonPressed" disabledImage:nil buttonMode:kTouchDownInside];
     [self.tapButton setDelegate:self];
     NSInteger buttonHeight = [self.tapButton getHeight];
-    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
+    float yCoord = 0;
+    
+    if (isiPhone5) {
+        yCoord = TAP_BUTTON_HEIGHT_4_INCH;
+    } else {
+        yCoord = TAP_BUTTON_HEIGHT_3_5_INCH;
+    }
+    [self.tapButton setPosition:CGPointMake(CGRectGetMidX(self.frame), yCoord + (buttonHeight/2))];
     [self.tapButton setEnabled:YES];
     [self.tapButton setName:@"tapButton"];
     [self.tapButton setZPosition:BUTTON_Z_LEVEL];
@@ -152,7 +169,13 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     self.beginButton = [SKSpriteButton spriteButtonWithUpImage:@"beginButton" downImage:@"beginButtonPressed" disabledImage:nil buttonMode:kTouchDownInside];
     [self.beginButton setDelegate:self];
     NSInteger buttonHeight = [self.beginButton getHeight];
-    [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
+    float yCoord = 0;
+    if (isiPhone5) {
+        yCoord = TAP_BUTTON_HEIGHT_4_INCH;
+    } else {
+        yCoord = TAP_BUTTON_HEIGHT_3_5_INCH;
+    }
+    [self.beginButton setPosition:CGPointMake(CGRectGetMidX(self.frame), yCoord + (buttonHeight/2))];
     [self.beginButton setEnabled:YES];
     [self.beginButton setName:@"beginButton"];
     [self.beginButton setZPosition:BUTTON_Z_LEVEL + 1];
@@ -167,7 +190,13 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     self.restartButton = [SKSpriteButton spriteButtonWithUpImage:@"restartButton" downImage:@"restartButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
     [self.restartButton setDelegate:self];
     NSInteger buttonHeight = [self.restartButton getHeight];
-    [self.restartButton setPosition:CGPointMake(CGRectGetMidX(self.frame), TAP_BUTTON_HEIGHT + (buttonHeight/2))];
+    float yCoord = 0;
+    if (isiPhone5) {
+        yCoord = TAP_BUTTON_HEIGHT_4_INCH;
+    } else {
+        yCoord = TAP_BUTTON_HEIGHT_3_5_INCH;
+    }
+    [self.restartButton setPosition:CGPointMake(CGRectGetMidX(self.frame), yCoord + (buttonHeight/2))];
     [self.restartButton setEnabled:YES];
     [self.restartButton setName:@"restartButton"];
     [self.restartButton setZPosition:BUTTON_Z_LEVEL + 2];
@@ -408,7 +437,13 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     hitTimeLabel.fontSize = TIMER_FONT_SIZE;
     CGSize textSize = [@"00.00.00" sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
     CGFloat strikeWidth = textSize.width;
-    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, CGRectGetMidY(self.frame) + 30);
+    float yCoord = 0;
+    if (isiPhone5) {
+        yCoord = CGRectGetMidY(self.frame) + 30;
+    } else {
+        yCoord = CGRectGetMidY(self.frame);
+    }
+    hitTimeLabel.position = CGPointMake(CGRectGetMidX(self.frame) - strikeWidth/2, yCoord);
     [hitTimeLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeLeft];
     [hitTimeLabel setFontColor:hitColor];
     [hitTimeLabel setZPosition:BUTTON_Z_LEVEL - 2];

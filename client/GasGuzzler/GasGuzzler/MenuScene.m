@@ -30,7 +30,10 @@
 
 @implementation MenuScene
 
-static const NSInteger MENU_ITEMS_HEIGHT = 230;
+static const int MENU_ITEMS_HEIGHT_4_INCH = 230;
+static const int MENU_ITEMS_HEIGHT_3_5_INCH = 175;
+
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
 /*
  * Setup elements of the scene
@@ -61,6 +64,10 @@ static const NSInteger MENU_ITEMS_HEIGHT = 230;
     
     self.logoButton = [SKSpriteButton spriteButtonWithUpImage:@"logo" downImage:@"logoPressed" disabledImage:nil buttonMode:kTouchUpInside];
     self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 100);
+    if (!isiPhone5) {
+        [self.logoButton setScale:.75f];
+        self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 80);
+    }
     [self.logoButton setEnabled:YES];
     [self.logoButton setDelegate:self];
     [self addChild:self.logoButton];
@@ -71,7 +78,12 @@ static const NSInteger MENU_ITEMS_HEIGHT = 230;
  */
 - (void)setupMenuItems
 {
-    float yCenter = MENU_ITEMS_HEIGHT;
+    float yCenter = 0;
+    if (isiPhone5) {
+        yCenter= MENU_ITEMS_HEIGHT_4_INCH;
+    } else {
+        yCenter = MENU_ITEMS_HEIGHT_3_5_INCH;
+    }
     float xCenter = CGRectGetMidX(self.frame);
     
     self.infinityModeButton = [SKSpriteButton spriteButtonWithUpImage:@"infinityModeButton" downImage:@"infinityModeButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];

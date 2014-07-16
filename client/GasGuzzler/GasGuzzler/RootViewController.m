@@ -17,17 +17,22 @@
 
 @end
 
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
+
+
 @implementation RootViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Show the iAd
-    self.bannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50, 320, 50)];
-    [self.bannerView setDelegate:self];
-    [self.view addSubview:self.bannerView];
     
+    if (isiPhone5) {
+        // Show the iAd
+        self.bannerView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50, 320, 50)];
+        [self.bannerView setDelegate:self];
+        [self.view addSubview:self.bannerView];
+    }
     
     // Configure the view.
     SKView * skView = (SKView *)self.view;
