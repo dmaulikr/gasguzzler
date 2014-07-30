@@ -158,7 +158,7 @@ static const int MENU_ITEMS_HEIGHT_3_5_INCH = 175;
         [self.view presentScene:tgs transition:transition];
     } else if ([button.name isEqualToString:@"helpButton"]) {
         if (!self.hv) {
-            self.hv = [[HelpView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            self.hv = [[HelpView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) gameMode:@"infinity"];
             [self.hv setDelegate:self];
         }
         [self.hv setAlpha:0.0f];

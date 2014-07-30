@@ -50,17 +50,16 @@ static const CGFloat kHelpLabelPadding = 10;
         
         NSMutableAttributedString *instructions = nil;
         
-        if ([gameMode isEqualToString:@"infinity"]) {
-            instructions = [[NSMutableAttributedString alloc] initWithString:@"Hit the TAP button as close to the second mark as you can. You must be within 10 milliseconds!"];
-            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.61 green:0.35 blue:0.71 alpha:1] range:NSMakeRange(8, 3)];
-            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1] range:NSMakeRange(35, 7)];
-            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1] range:NSMakeRange(78, 2)];
-        }
         if ([gameMode isEqualToString:@"thirty"]) {
             instructions = [[NSMutableAttributedString alloc] initWithString:@"Hit the TAP button as close to the second mark as you can. Close taps get a higher score!"];
             [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.61 green:0.35 blue:0.71 alpha:1] range:NSMakeRange(8, 3)];
             [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1] range:NSMakeRange(35, 7)];
             [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.1 green:0.74 blue:0.61 alpha:1] range:NSMakeRange(83, 5)];
+        } else {
+            instructions = [[NSMutableAttributedString alloc] initWithString:@"Hit the TAP button as close to the second mark as you can. You must be within 10 milliseconds!"];
+            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.61 green:0.35 blue:0.71 alpha:1] range:NSMakeRange(8, 3)];
+            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.18 green:0.8 blue:0.44 alpha:1] range:NSMakeRange(35, 7)];
+            [instructions addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.91 green:0.3 blue:0.24 alpha:1] range:NSMakeRange(78, 2)];
         }
 
         
