@@ -24,7 +24,7 @@
     [Parse setApplicationId:@"0i9gbZ0Rac7dFKI4yM0imy2K3RzsWcnrNTrKj6fp"
                   clientKey:@"UL3oDdKtafceXoN7IELlZQDZTOp6tspOelTB7uwV"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
+
     // Authenticate the Game Center player
     [self authenticateLocalPlayer];
     

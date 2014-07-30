@@ -59,6 +59,7 @@
 		AFF7B2DB1918B98D00B8085C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2DA1918B98D00B8085C /* Security.framework */; };
 		AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF7B2DC1918B99200B8085C /* SystemConfiguration.framework */; };
 		AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */; };
+		AFF9E66B19887DE300CBCAE2 /* HelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF9E66A19887DE300CBCAE2 /* HelpView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,8 @@
 		AFF7B2DC1918B99200B8085C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AFF7B2DE1918C75700B8085C /* InfinityGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfinityGameScene.h; sourceTree = "<group>"; };
 		AFF7B2DF1918C75700B8085C /* InfinityGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfinityGameScene.m; sourceTree = "<group>"; };
+		AFF9E66919887DE300CBCAE2 /* HelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpView.h; sourceTree = "<group>"; };
+		AFF9E66A19887DE300CBCAE2 /* HelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +219,8 @@
 				AFB6E31F1921E4C5008EE801 /* ThirtyScoreNode.m */,
 				AFB6E3211921E4CE008EE801 /* InfinityScoreNode.h */,
 				AFB6E3221921E4CE008EE801 /* InfinityScoreNode.m */,
+				AFF9E66919887DE300CBCAE2 /* HelpView.h */,
+				AFF9E66A19887DE300CBCAE2 /* HelpView.m */,
 			);
 			name = "Custom Subclasses";
 			sourceTree = "<group>";
@@ -537,6 +542,7 @@
 				AF91F4F11920950000462855 /* User+Utils.m in Sources */,
 				AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */,
 				AF91F4EA1920941A00462855 /* XCDataModel.xcdatamodeld in Sources */,
+				AFF9E66B19887DE300CBCAE2 /* HelpView.m in Sources */,
 				AF91F4F41920951900462855 /* DataManager.m in Sources */,
 				AF91F4EE192094E100462855 /* User.m in Sources */,
 				AF57DDE319189C2800674CD5 /* NSDate+Utils.m in Sources */,

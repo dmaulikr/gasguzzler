@@ -12,11 +12,12 @@
 #import "InfinityGameScene.h"
 #import "AppDelegate.h"
 #import "ThirtyGameScene.h"
+#import "HelpView.h"
 
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
 
-@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate, UIAlertViewDelegate>
+@interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate, UIAlertViewDelegate, HelpViewDelegate>
 
 @property (nonatomic, strong) SKSpriteButton *logoButton;
 
@@ -25,6 +26,7 @@
 @property (nonatomic, strong) SKSpriteButton *thirtySecondModeButton;
 @property (nonatomic, strong) SKSpriteButton *leaderboardsButton;
 @property (nonatomic, strong) SKSpriteButton *helpButton;
+@property (nonatomic, strong) HelpView *hv;
 
 @end
 
@@ -154,7 +156,27 @@ static const int MENU_ITEMS_HEIGHT_3_5_INCH = 175;
         ThirtyGameScene *tgs = [[ThirtyGameScene alloc] initWithSize:self.frame.size];
         SKTransition *transition = [SKTransition pushWithDirection:SKTransitionDirectionLeft duration:0.3f];
         [self.view presentScene:tgs transition:transition];
+    } else if ([button.name isEqualToString:@"helpButton"]) {
+        if (!self.hv) {
+            self.hv = [[HelpView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            [self.hv setDelegate:self];
+        }
+        [self.hv setAlpha:0.0f];
+        [self.view addSubview:self.hv];
+        
+        [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.hv setAlpha:1.0f];
+        } completion:nil];
     }
+}
+
+- (void)didExitHelpView
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.hv setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [self.hv removeFromSuperview];
+    }];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

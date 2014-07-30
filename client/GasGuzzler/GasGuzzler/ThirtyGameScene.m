@@ -13,10 +13,12 @@
 #import "ThirtyScoreNode.h"
 #import "SKEase.h"
 #import "UIColor+Extensions.h"
+#import "HelpView.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
 
-@interface ThirtyGameScene () <SKSpriteButtonDelegate>
+@interface ThirtyGameScene () <SKSpriteButtonDelegate, HelpViewDelegate>
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
 @property (nonatomic, strong) SKLabelNode *scoreLabel;
@@ -35,6 +37,7 @@
 
 @property (nonatomic, strong) SKNode *gameNode;
 @property (nonatomic, strong) ThirtyScoreNode *scoreNode;
+@property (nonatomic, strong) HelpView *hv;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -101,6 +104,36 @@ static const NSInteger TAP_BUTTON_HEIGHT_3_5_INCH = 20;
     }
     
     return self;
+}
+
+- (void)didMoveToView:(SKView *)view
+{
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"thirtyGame"]) {
+    
+        if (!self.hv) {
+            self.hv = [[HelpView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) gameMode:@"thirty"];
+            [self.hv setDelegate:self];
+        }
+        
+        [self.hv setAlpha:0.0f];
+        [self.view addSubview:self.hv];
+        
+        [UIView animateWithDuration:0.3f delay:0.3f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.hv setAlpha:1.0f];
+        } completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"thirtyGame"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)didExitHelpView
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.hv setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [self.hv removeFromSuperview];
+    }];
 }
 
 /*

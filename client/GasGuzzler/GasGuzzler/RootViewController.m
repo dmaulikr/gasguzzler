@@ -10,6 +10,7 @@
 #import "MenuScene.h"
 
 #import <iAd/iAd.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface RootViewController () <ADBannerViewDelegate>
 
@@ -17,7 +18,7 @@
 
 @end
 
-#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568) ? TRUE : FALSE
 
 
 @implementation RootViewController
@@ -25,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     if (isiPhone5) {
         // Show the iAd

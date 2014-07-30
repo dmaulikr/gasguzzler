@@ -13,10 +13,12 @@
 #import "InfinityScoreNode.h"
 #import "SKEase.h"
 #import "UIColor+Extensions.h"
+#import "HelpView.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
 
-@interface InfinityGameScene () <SKSpriteButtonDelegate>
+@interface InfinityGameScene () <SKSpriteButtonDelegate, HelpViewDelegate>
 
 @property (nonatomic, strong) SKLabelNode *gameTimeLabel;
 @property (nonatomic, strong) NSTimer *gameTimer;
@@ -34,6 +36,7 @@
 @property (nonatomic, strong) SKSpriteButton *backButton;
 
 @property (nonatomic, strong) InfinityScoreNode *scoreNode;
+@property (nonatomic, strong) HelpView *hv;
 
 // Value in milliseconds
 @property (nonatomic) NSInteger timeThreshold;
@@ -91,6 +94,36 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     }
     
     return self;
+}
+
+- (void)didMoveToView:(SKView *)view
+{
+    if (![[NSUserDefaults standardUserDefaults] valueForKey:@"firstInfinityGame"]) {
+        
+        if (!self.hv) {
+            self.hv = [[HelpView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) gameMode:@"infinity"];
+            [self.hv setDelegate:self];
+        }
+        
+        [self.hv setAlpha:0.0f];
+        [self.view addSubview:self.hv];
+        
+        [UIView animateWithDuration:0.3f delay:0.3f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.hv setAlpha:1.0f];
+        } completion:nil];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:YES] forKey:@"firstInfinityGame"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)didExitHelpView
+{
+    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.hv setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [self.hv removeFromSuperview];
+    }];
 }
 
 /*
