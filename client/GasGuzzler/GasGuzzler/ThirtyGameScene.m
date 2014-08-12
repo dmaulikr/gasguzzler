@@ -511,7 +511,7 @@ static const NSInteger TAP_BUTTON_HEIGHT_3_5_INCH = 20;
     
     NSLog(@"Score: %d", (int)scoreForHit);
     
-    if (roundedMilliseconds == 1000) roundedMilliseconds = 0;
+    if (roundedMilliseconds >= 1000) roundedMilliseconds = 0;
     
     
     // Spawn a sprite of the time

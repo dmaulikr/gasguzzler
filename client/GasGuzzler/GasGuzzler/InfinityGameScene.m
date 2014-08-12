@@ -461,7 +461,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         return;
     }
     
-    if (roundedMilliseconds == 1000) roundedMilliseconds = 0;
+    if (roundedMilliseconds >= 1000) roundedMilliseconds = 0;
     
     
     // Spawn a sprite of the time

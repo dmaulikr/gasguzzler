@@ -21,11 +21,17 @@
 		AF91F4E119208F7F00462855 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E019208F7F00462855 /* CoreLocation.framework */; };
 		AF91F4E319208F9800462855 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E219208F9800462855 /* libz.dylib */; };
 		AF91F4E519208FA400462855 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E419208FA400462855 /* MobileCoreServices.framework */; };
-		AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E619208FBD00462855 /* StoreKit.framework */; };
+		AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4E619208FBD00462855 /* StoreKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AF91F4EA1920941A00462855 /* XCDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4E81920941A00462855 /* XCDataModel.xcdatamodeld */; };
 		AF91F4EE192094E100462855 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4ED192094E100462855 /* User.m */; };
 		AF91F4F11920950000462855 /* User+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4F01920950000462855 /* User+Utils.m */; };
 		AF91F4F41920951900462855 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91F4F31920951900462855 /* DataManager.m */; };
+		AF92C48B1999D408001F8D7E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AF92C4631999D408001F8D7E /* .gitignore */; };
+		AF92C48C1999D408001F8D7E /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = AF92C4651999D408001F8D7E /* Appirater.m */; };
+		AF92C48D1999D408001F8D7E /* Appirater.podspec in Resources */ = {isa = PBXBuildFile; fileRef = AF92C4661999D408001F8D7E /* Appirater.podspec */; };
+		AF92C48E1999D408001F8D7E /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF92C4681999D408001F8D7E /* AppiraterLocalizable.strings */; };
+		AF92C48F1999D408001F8D7E /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = AF92C46B1999D408001F8D7E /* CHANGELOG.md */; };
+		AF92C4901999D408001F8D7E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AF92C4801999D408001F8D7E /* README.md */; };
 		AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */; };
 		AFB6E31C19219838008EE801 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = AFB6E31619219838008EE801 /* easing.c */; };
 		AFB6E31D19219838008EE801 /* SKEase.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB6E31A19219838008EE801 /* SKEase.m */; };
@@ -98,6 +104,45 @@
 		AF91F4F01920950000462855 /* User+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Utils.m"; sourceTree = "<group>"; };
 		AF91F4F21920951900462855 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		AF91F4F31920951900462855 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		AF92C4631999D408001F8D7E /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AF92C4641999D408001F8D7E /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		AF92C4651999D408001F8D7E /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		AF92C4661999D408001F8D7E /* Appirater.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appirater.podspec; sourceTree = "<group>"; };
+		AF92C4671999D408001F8D7E /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		AF92C4691999D408001F8D7E /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C46A1999D408001F8D7E /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C46B1999D408001F8D7E /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		AF92C46C1999D408001F8D7E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C46D1999D408001F8D7E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C46E1999D408001F8D7E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C46F1999D408001F8D7E /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4701999D408001F8D7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4711999D408001F8D7E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4721999D408001F8D7E /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4731999D408001F8D7E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4741999D408001F8D7E /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4751999D408001F8D7E /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4761999D408001F8D7E /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4771999D408001F8D7E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4781999D408001F8D7E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4791999D408001F8D7E /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C47A1999D408001F8D7E /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C47B1999D408001F8D7E /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C47C1999D408001F8D7E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C47D1999D408001F8D7E /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C47E1999D408001F8D7E /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		AF92C47F1999D408001F8D7E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4801999D408001F8D7E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		AF92C4811999D408001F8D7E /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4821999D408001F8D7E /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4831999D408001F8D7E /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4841999D408001F8D7E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4851999D408001F8D7E /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4861999D408001F8D7E /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4871999D408001F8D7E /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4881999D408001F8D7E /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		AF92C4891999D408001F8D7E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		AF92C48A1999D408001F8D7E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		AFAAF5EC191ADEB100ABAB07 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		AFB6E31619219838008EE801 /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easing.c; sourceTree = "<group>"; };
 		AFB6E31719219838008EE801 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
@@ -155,17 +200,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */,
 				AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */,
+				AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */,
 				AF6743B51976076200723B27 /* MessageUI.framework in Frameworks */,
 				AF6743B31976075A00723B27 /* CoreTelephony.framework in Frameworks */,
 				AF6743B11976074F00723B27 /* AVFoundation.framework in Frameworks */,
 				AF6743AF1976074400723B27 /* AdSupport.framework in Frameworks */,
 				AF6743751976018B00723B27 /* iAd.framework in Frameworks */,
-				AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */,
 				AF91F4E519208FA400462855 /* MobileCoreServices.framework in Frameworks */,
 				AF91F4E319208F9800462855 /* libz.dylib in Frameworks */,
 				AF91F4E119208F7F00462855 /* CoreLocation.framework in Frameworks */,
-				AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */,
 				AFAAF5ED191ADEB100ABAB07 /* AudioToolbox.framework in Frameworks */,
 				AFF7B2DB1918B98D00B8085C /* Security.framework in Frameworks */,
 				AFF7B2D91918B98800B8085C /* QuartzCore.framework in Frameworks */,
@@ -260,6 +305,21 @@
 			name = NSManagedObjects;
 			sourceTree = "<group>";
 		};
+		AF92C4621999D408001F8D7E /* appirater */ = {
+			isa = PBXGroup;
+			children = (
+				AF92C4631999D408001F8D7E /* .gitignore */,
+				AF92C4641999D408001F8D7E /* Appirater.h */,
+				AF92C4651999D408001F8D7E /* Appirater.m */,
+				AF92C4661999D408001F8D7E /* Appirater.podspec */,
+				AF92C4671999D408001F8D7E /* AppiraterDelegate.h */,
+				AF92C4681999D408001F8D7E /* AppiraterLocalizable.strings */,
+				AF92C46B1999D408001F8D7E /* CHANGELOG.md */,
+				AF92C4801999D408001F8D7E /* README.md */,
+			);
+			path = appirater;
+			sourceTree = "<group>";
+		};
 		AFB6E31519219838008EE801 /* SpriteKit-Easing */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,6 +385,7 @@
 		AFC439E619170CD100726778 /* GasGuzzler */ = {
 			isa = PBXGroup;
 			children = (
+				AF92C4621999D408001F8D7E /* appirater */,
 				AFB6E31519219838008EE801 /* SpriteKit-Easing */,
 				AF91F4EB192094D300462855 /* NSManagedObjects */,
 				AF57DDE019189C1700674CD5 /* Categories */,
@@ -471,6 +532,37 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				es,
+				fi,
+				fr,
+				he,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nb,
+				nl,
+				pl,
+				"pt-BR",
+				pt,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				tr,
+				uk,
+				vi,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = AFC439D219170CD100726778;
 			productRefGroup = AFC439DC19170CD100726778 /* Products */;
@@ -488,12 +580,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF92C48B1999D408001F8D7E /* .gitignore in Resources */,
 				AFF7B2D41918B97200B8085C /* HockeySDK.xcconfig in Resources */,
+				AF92C48F1999D408001F8D7E /* CHANGELOG.md in Resources */,
 				AFC439EB19170CD100726778 /* InfoPlist.strings in Resources */,
 				AFF7B2D51918B97200B8085C /* HockeySDKResources.bundle in Resources */,
 				AFC439FE19170CD100726778 /* Images.xcassets in Resources */,
+				AF92C4901999D408001F8D7E /* README.md in Resources */,
 				AFF7705319183551004E4AE5 /* american_captain.ttf in Resources */,
+				AF92C48D1999D408001F8D7E /* Appirater.podspec in Resources */,
 				AFC43A1D19170ED500726778 /* calculator.ttf in Resources */,
+				AF92C48E1999D408001F8D7E /* AppiraterLocalizable.strings in Resources */,
 				AFC439F419170CD100726778 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +632,7 @@
 				AFF77059191837C1004E4AE5 /* SKLabelButton.m in Sources */,
 				AFF7B2E01918C75700B8085C /* InfinityGameScene.m in Sources */,
 				AFF7706219184B81004E4AE5 /* SKSpriteButton.m in Sources */,
+				AF92C48C1999D408001F8D7E /* Appirater.m in Sources */,
 				AFF7705C19183DFC004E4AE5 /* RootViewController.m in Sources */,
 				AFB6E3231921E4CE008EE801 /* InfinityScoreNode.m in Sources */,
 				AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */,
@@ -570,6 +668,45 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AF92C4681999D408001F8D7E /* AppiraterLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF92C4691999D408001F8D7E /* ar */,
+				AF92C46A1999D408001F8D7E /* ca */,
+				AF92C46C1999D408001F8D7E /* cs */,
+				AF92C46D1999D408001F8D7E /* da */,
+				AF92C46E1999D408001F8D7E /* de */,
+				AF92C46F1999D408001F8D7E /* el */,
+				AF92C4701999D408001F8D7E /* en */,
+				AF92C4711999D408001F8D7E /* es */,
+				AF92C4721999D408001F8D7E /* fi */,
+				AF92C4731999D408001F8D7E /* fr */,
+				AF92C4741999D408001F8D7E /* he */,
+				AF92C4751999D408001F8D7E /* hu */,
+				AF92C4761999D408001F8D7E /* id */,
+				AF92C4771999D408001F8D7E /* it */,
+				AF92C4781999D408001F8D7E /* ja */,
+				AF92C4791999D408001F8D7E /* ko */,
+				AF92C47A1999D408001F8D7E /* ms */,
+				AF92C47B1999D408001F8D7E /* nb */,
+				AF92C47C1999D408001F8D7E /* nl */,
+				AF92C47D1999D408001F8D7E /* pl */,
+				AF92C47E1999D408001F8D7E /* pt-BR */,
+				AF92C47F1999D408001F8D7E /* pt */,
+				AF92C4811999D408001F8D7E /* ro */,
+				AF92C4821999D408001F8D7E /* ru */,
+				AF92C4831999D408001F8D7E /* sk */,
+				AF92C4841999D408001F8D7E /* sv */,
+				AF92C4851999D408001F8D7E /* th */,
+				AF92C4861999D408001F8D7E /* tr */,
+				AF92C4871999D408001F8D7E /* uk */,
+				AF92C4881999D408001F8D7E /* vi */,
+				AF92C4891999D408001F8D7E /* zh-Hans */,
+				AF92C48A1999D408001F8D7E /* zh-Hant */,
+			);
+			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		AFC439E919170CD100726778 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -672,8 +809,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Randomay Designs (Y6FLUCNFEW)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Randomay Designs (Y6FLUCNFEW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
@@ -701,8 +838,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Randomay Designs (Y6FLUCNFEW)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Randomay Designs (Y6FLUCNFEW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Raymond Kennedy (BARG5WWWW2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",

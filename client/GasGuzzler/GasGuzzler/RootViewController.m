@@ -69,11 +69,17 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    [self.bannerView setHidden:NO];
+}
+
 /*
  * iAd Failed
  */
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
     NSLog(@"iAd failed");
+    [self.bannerView setHidden:YES];
 }
 
 @end

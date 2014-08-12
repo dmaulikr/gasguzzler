@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "User+Utils.h"
+#import "Appirater.h"
 #import <HockeySDK/HockeySDK.h>
 #import <GameKit/GameKit.h>
 #import <Parse/Parse.h>
@@ -16,6 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Appirater setAppId:@"877124092"];
+    [Appirater setDaysUntilPrompt:2];
+    [Appirater setUsesUntilPrompt:10];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:2];
+    [Appirater setDebug:YES];
+    
     // Hockey stuff
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"1dbded089e2c4562cb4d166eb57a1b2a"];
     [[BITHockeyManager sharedHockeyManager] startManager];
@@ -27,6 +35,8 @@
 
     // Authenticate the Game Center player
     [self authenticateLocalPlayer];
+    
+    [Appirater appLaunched:YES];
     
     // Override point for customization after application launch.
     return YES;
@@ -139,6 +149,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [Appirater appEnteredForeground:YES];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
