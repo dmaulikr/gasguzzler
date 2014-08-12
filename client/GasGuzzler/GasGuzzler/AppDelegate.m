@@ -18,8 +18,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Appirater setAppId:@"877124092"];
-    [Appirater setDaysUntilPrompt:2];
-    [Appirater setUsesUntilPrompt:10];
+    [Appirater setDaysUntilPrompt:3];
+    [Appirater setUsesUntilPrompt:15];
     [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:2];
     [Appirater setDebug:YES];

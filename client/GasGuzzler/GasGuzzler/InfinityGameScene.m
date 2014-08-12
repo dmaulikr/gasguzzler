@@ -34,6 +34,7 @@
 @property (nonatomic, strong) SKSpriteButton *beginButton;
 @property (nonatomic, strong) SKSpriteButton *restartButton;
 @property (nonatomic, strong) SKSpriteButton *backButton;
+@property (nonatomic, strong) SKSpriteButton *tweetButton;
 
 @property (nonatomic, strong) InfinityScoreNode *scoreNode;
 @property (nonatomic, strong) HelpView *hv;
@@ -77,6 +78,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         [self setupBeginButton];
         [self setupRestartButton];
         [self setupBackButton];
+        [self setupTweetButton];
         
         // Hide the tap button @ start
         [self.tapButton setHidden:YES];
@@ -251,6 +253,17 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self addChild:self.backButton];
 }
 
+- (void)setupTweetButton
+{
+    self.tweetButton = [SKSpriteButton spriteButtonWithUpImage:@"backButton" downImage:@"backButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    [self.tweetButton setDelegate:self];
+    [self.tweetButton setPosition:CGPointMake(320 - self.tweetButton.frame.size.width/2 - 10, self.frame.size.height - (self.tweetButton.frame.size.height/2) - 27)];
+    [self.tweetButton setEnabled:YES];
+    [self.tweetButton setName:@"tweetButton"];
+    [self.tweetButton setZPosition:BUTTON_Z_LEVEL];
+    [self addChild:self.tweetButton];
+}
+
 /*
  * Start the game
  */
@@ -349,6 +362,20 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     
     // Animate score
     [self animateScoreChange];
+    
+    // Show the share to twitter button
+    [self _showShareToTwitterButton];
+    
+    
+}
+
+- (void)tweetScore
+{
+    NSLog(@"Setting up tweet for score.");
+}
+
+- (void)_showShareToTwitterButton
+{
     
 }
 
@@ -537,6 +564,8 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         
         [self swapZs:self.restartButton withSprite:self.beginButton];
         
+    } else if ([button.name isEqualToString:@"tweetButton"]) {
+        [self tweetScore];
     }
 }
 
