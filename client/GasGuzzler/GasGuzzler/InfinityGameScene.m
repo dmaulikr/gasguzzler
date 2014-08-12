@@ -255,12 +255,13 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
 
 - (void)setupTweetButton
 {
-    self.tweetButton = [SKSpriteButton spriteButtonWithUpImage:@"backButton" downImage:@"backButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    self.tweetButton = [SKSpriteButton spriteButtonWithUpImage:@"twitterButton" downImage:@"twitterButtonPressed" disabledImage:nil buttonMode:kTouchUpInside];
     [self.tweetButton setDelegate:self];
     [self.tweetButton setPosition:CGPointMake(320 - self.tweetButton.frame.size.width/2 - 10, self.frame.size.height - (self.tweetButton.frame.size.height/2) - 27)];
     [self.tweetButton setEnabled:YES];
     [self.tweetButton setName:@"tweetButton"];
     [self.tweetButton setZPosition:BUTTON_Z_LEVEL];
+    [self.tweetButton setHidden:YES];
     [self addChild:self.tweetButton];
 }
 
@@ -304,6 +305,8 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     int currentMilliseconds = (int)(timeInterval * 1000) % 1000;
     double tenths = (double)currentMilliseconds/10;
     int roundedMilliseconds = round(tenths) * 10;
+    
+    if (roundedMilliseconds >= 1000) roundedMilliseconds = 0;
     
     [self.gameTimeLabel setText:[NSString stringWithFormat:@"%02d.%02d.%02d", currentMinutes, currentSeconds, roundedMilliseconds/10]];
     
@@ -489,7 +492,6 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     }
     
     if (roundedMilliseconds >= 1000) roundedMilliseconds = 0;
-    
     
     // Spawn a sprite of the time
     SKLabelNode *hitTimeLabel = [SKLabelNode labelNodeWithFontNamed:@"AmericanCaptain"];
