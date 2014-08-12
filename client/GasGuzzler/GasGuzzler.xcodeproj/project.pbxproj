@@ -15,6 +15,8 @@
 		AF6743B31976075A00723B27 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743B21976075A00723B27 /* CoreTelephony.framework */; };
 		AF6743B51976076200723B27 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6743B41976076200723B27 /* MessageUI.framework */; };
 		AF7E0996191A047F00E0D808 /* UIColor+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */; };
+		AF8FCF8A1999EFFF005A89E5 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8FCF891999EFFF005A89E5 /* Twitter.framework */; };
+		AF8FCF8C1999F00A005A89E5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8FCF8B1999F00A005A89E5 /* Social.framework */; };
 		AF91969E191EC9CF007C71F6 /* ThirtyGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */; };
 		AF91F4DD19208F5400462855 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4DC19208F5400462855 /* Parse.framework */; };
 		AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF91F4DE19208F7200462855 /* CFNetwork.framework */; };
@@ -89,6 +91,8 @@
 		AF6743B41976076200723B27 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		AF7E0994191A047F00E0D808 /* UIColor+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extensions.h"; sourceTree = "<group>"; };
 		AF7E0995191A047F00E0D808 /* UIColor+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extensions.m"; sourceTree = "<group>"; };
+		AF8FCF891999EFFF005A89E5 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		AF8FCF8B1999F00A005A89E5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		AF91969C191EC9CF007C71F6 /* ThirtyGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirtyGameScene.h; sourceTree = "<group>"; };
 		AF91969D191EC9CF007C71F6 /* ThirtyGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirtyGameScene.m; sourceTree = "<group>"; };
 		AF91F4DC19208F5400462855 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8FCF8C1999F00A005A89E5 /* Social.framework in Frameworks */,
+				AF8FCF8A1999EFFF005A89E5 /* Twitter.framework in Frameworks */,
 				AF91F4E719208FBD00462855 /* StoreKit.framework in Frameworks */,
 				AFF7B2DD1918B99200B8085C /* SystemConfiguration.framework in Frameworks */,
 				AF91F4DF19208F7200462855 /* CFNetwork.framework in Frameworks */,
@@ -355,6 +361,8 @@
 		AFC439DD19170CD100726778 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF8FCF8B1999F00A005A89E5 /* Social.framework */,
+				AF8FCF891999EFFF005A89E5 /* Twitter.framework */,
 				AF6743B41976076200723B27 /* MessageUI.framework */,
 				AF6743B21976075A00723B27 /* CoreTelephony.framework */,
 				AF6743B01976074F00723B27 /* AVFoundation.framework */,

@@ -73,13 +73,13 @@ static const CGFloat kHelpLabelPadding = 10;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint locationPoint = [[touches anyObject] locationInView:self];
-    UIView* viewYouWishToObtain = [self hitTest:locationPoint withEvent:event];
-    if (viewYouWishToObtain != _helpView) {
+//    CGPoint locationPoint = [[touches anyObject] locationInView:self];
+//    UIView* viewYouWishToObtain = [self hitTest:locationPoint withEvent:event];
+//    if (viewYouWishToObtain != _helpView) {
         if ([self.delegate respondsToSelector:@selector(didExitHelpView)]) {
             [self.delegate didExitHelpView];
         }
-    }
+//    }
 }
 
 @end
