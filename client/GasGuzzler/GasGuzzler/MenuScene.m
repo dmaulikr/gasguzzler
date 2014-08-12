@@ -19,7 +19,7 @@
 
 @interface MenuScene () <SKLabelButtonDelegate, SKSpriteButtonDelegate, GKGameCenterControllerDelegate, UIAlertViewDelegate, HelpViewDelegate>
 
-@property (nonatomic, strong) SKSpriteButton *logoButton;
+@property (nonatomic, strong) SKSpriteNode *logoButton;
 
 // Menu Items
 @property (nonatomic, strong) SKSpriteButton *infinityModeButton;
@@ -64,14 +64,13 @@ static const int MENU_ITEMS_HEIGHT_3_5_INCH = 175;
  */
 - (void)setupTitle {
     
-    self.logoButton = [SKSpriteButton spriteButtonWithUpImage:@"logo" downImage:@"logoPressed" disabledImage:nil buttonMode:kTouchUpInside];
+    self.logoButton = [SKSpriteNode spriteNodeWithImageNamed:@"logo"];
     self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 100);
     if (!isiPhone5) {
         [self.logoButton setScale:.75f];
         self.logoButton.position = CGPointMake(CGRectGetMidX(self.frame), self.frame.size.height - 80);
     }
-    [self.logoButton setEnabled:YES];
-    [self.logoButton setDelegate:self];
+
     [self addChild:self.logoButton];
 }
 
