@@ -18,11 +18,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Appirater setAppId:@"877124092"];
-    [Appirater setDaysUntilPrompt:3];
+    [Appirater setDaysUntilPrompt:2];
     [Appirater setUsesUntilPrompt:15];
     [Appirater setSignificantEventsUntilPrompt:-1];
-    [Appirater setTimeBeforeReminding:2];
-    [Appirater setDebug:YES];
+    [Appirater setTimeBeforeReminding:1];
+    [Appirater setDebug:NO];
     
     // Hockey stuff
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"1dbded089e2c4562cb4d166eb57a1b2a"];

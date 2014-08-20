@@ -17,6 +17,7 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 #import <GameKit/GameKit.h>
+#import <Social/Social.h>
 
 @interface InfinityGameScene () <SKSpriteButtonDelegate, HelpViewDelegate>
 
@@ -367,19 +368,37 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self animateScoreChange];
     
     // Show the share to twitter button
-    [self _showShareToTwitterButton];
-    
-    
+    [self.tweetButton setHidden:NO];
+
 }
 
 - (void)tweetScore
 {
     NSLog(@"Setting up tweet for score.");
-}
-
-- (void)_showShareToTwitterButton
-{
     
+    SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+    tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
+        switch(result) {
+                //  This means the user cancelled without sending the Tweet
+            case SLComposeViewControllerResultCancelled:
+                break;
+                //  This means the user hit 'Send'
+            case SLComposeViewControllerResultDone:
+                break;
+        }
+    };
+    
+    [tweetSheet setInitialText:[NSString stringWithFormat:@"I just scored %d in Taps! Try to beat me!", (int)self.lastSecondHit]];
+    
+    //  Add an URL to the Tweet.  You can add multiple URLs.
+    if (![tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id877124092"]]){
+        NSLog(@"Unable to add the URL!");
+    }
+    
+    //  Presents the Tweet Sheet to the user
+    [self.view.window.rootViewController presentViewController:tweetSheet animated:YES completion:^{
+        NSLog(@"Presented tweet sheet");
+    }];
 }
 
 /*
@@ -399,6 +418,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
     [self.scoreNode runAction:moveInScoreNode completion:^{
         if (self.scoreNode.frame.origin.x > 320) {
             [self.scoreNode setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320, CGRectGetMidY(self.frame))];
+            
         }
     }];
     
@@ -410,6 +430,8 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
             CGSize textSize = [[self.gameTimeLabel text] sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AmericanCaptain" size:TIMER_FONT_SIZE]}];
             CGFloat strikeWidth = textSize.width;
             [self.gameTimeLabel setPosition:CGPointMake(CGRectGetMidX(self.frame) - 320 - (strikeWidth/2), CGRectGetMidY(self.frame))];
+        } else {
+            [self.beginButton setEnabled:YES];
         }
     }];
 }
@@ -562,7 +584,9 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         
         [self.tapButton setHidden:YES];
         [self.beginButton setHidden:NO];
+        [self.beginButton setEnabled:NO];
         [self.restartButton setHidden:YES];
+        [self.tweetButton setHidden:YES];
         
         [self swapZs:self.restartButton withSprite:self.beginButton];
         

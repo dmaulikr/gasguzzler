@@ -409,6 +409,8 @@ static const NSInteger TAP_BUTTON_HEIGHT_3_5_INCH = 20;
         NSLog(@"GameNode.frame.origin.x: %f", self.gameNode.frame.origin.x);
         if (self.gameNode.frame.origin.x >= self.frame.size.width) {
             [self.gameNode setPosition:CGPointMake(-self.frame.size.width, self.gameNode.frame.origin.y)];
+        } else {
+            [self.beginButton setEnabled:YES];
         }
     }];
 }
@@ -592,6 +594,7 @@ static const NSInteger TAP_BUTTON_HEIGHT_3_5_INCH = 20;
         
         [self.tapButton setHidden:YES];
         [self.beginButton setHidden:NO];
+        [self.beginButton setEnabled:NO];
         [self.restartButton setHidden:YES];
         
         [self swapZs:self.restartButton withSprite:self.beginButton];
