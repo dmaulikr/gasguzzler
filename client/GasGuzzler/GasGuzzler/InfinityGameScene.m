@@ -388,7 +388,7 @@ static const NSInteger BUTTON_Z_LEVEL = 10;
         }
     };
     
-    [tweetSheet setInitialText:[NSString stringWithFormat:@"I just scored %d in Taps! Try to beat me!", (int)self.lastSecondHit]];
+    [tweetSheet setInitialText:[NSString stringWithFormat:@"I just scored %d in Taps with %d perfects! Try to beat me!", (int)self.lastSecondHit, (int)self.perfectHits]];
     
     //  Add an URL to the Tweet.  You can add multiple URLs.
     if (![tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id877124092"]]){
