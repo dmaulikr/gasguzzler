@@ -45,7 +45,7 @@ static const int MENU_ITEMS_HEIGHT_3_5_INCH = 175;
         /* Setup your scene here */
         
         // Set the background color
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        self.backgroundColor = [SKColor whiteColor];
 
         // Setup the title
         [self setupTitle];
